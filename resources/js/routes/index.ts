@@ -3,6 +3,7 @@ import { categoryRoutes } from 'domains/categories';
 import { userRoutes } from 'domains/users';
 import { responseRoutes } from 'domains/responses';
 import { statusRoutes } from 'domains/statuses';
+import { authRoutes } from 'domains/auth';
 
 export const routes = [
     {
@@ -14,4 +15,5 @@ export const routes = [
     ...userRoutes,
     ...responseRoutes,
     ...statusRoutes,
+    ...authRoutes
 ];

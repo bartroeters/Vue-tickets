@@ -2,5 +2,5 @@
 </script>
 
 <template>
-    <div>categories/Overview.vue</div>
+    <div>categories/pages/Overview.vue</div>
 </template>

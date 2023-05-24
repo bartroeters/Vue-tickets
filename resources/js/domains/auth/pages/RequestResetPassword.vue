@@ -2,5 +2,5 @@
 </script>
 
 <template>
-    <div>tickets/pages/Overview.vue</div>
+    <div>auth/pages/RequestResetPassword.vue</div>
 </template>

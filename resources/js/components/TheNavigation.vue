@@ -2,12 +2,12 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <div>
-                <!-- <router-link
-                    :to="{name: 'books.overview'}"
+                <router-link
+                    :to="{name: 'tickets.overview'}"
                     class="header"
                     >
-                    Book Collection
-                </router-link> -->
+                    Tickets
+                </router-link>
             </div>
 
             <button
@@ -24,29 +24,29 @@
 
             <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <router-link
+                            :to="{name: 'tickets.overview'}"
+                            class="nav-link active router-link-exact-active"
+                            active-class="active-link"
+                            aria-current="page"
+                            >
+                            tickets/pages/Overview.vue
+                        </router-link>
+                    </li>
+
+                    <li class="nav-item">
+                        <router-link
+                            :to="{name: 'users.overview'}"
+                            class="nav-link active router-link-exact-active"
+                            active-class="active-link"
+                            aria-current="page"
+                            >
+                            users/pages/Overview.vue
+                        </router-link>
+                    </li>
+
                     <!-- <li class="nav-item">
-                        <router-link
-                            :to="{name: 'books.overview'}"
-                            class="nav-link active router-link-exact-active"
-                            active-class="active-link"
-                            aria-current="page"
-                            >
-                            Overview
-                        </router-link>
-                    </li>
-
-                    <li class="nav-item">
-                        <router-link
-                            :to="{name: 'authors.overview'}"
-                            class="nav-link active router-link-exact-active"
-                            active-class="active-link"
-                            aria-current="page"
-                            >
-                            Authors
-                        </router-link>
-                    </li>
-
-                    <li class="nav-item">
                         <router-link
                             :to="{name: 'books.create'}"
                             class="nav-link active router-link-exact-active"
@@ -55,9 +55,9 @@
                             >
                             Add book
                         </router-link>
-                    </li>
+                    </li> -->
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <router-link
                             :to="{name: 'authors.create'}"
                             class="nav-link active router-link-exact-active"

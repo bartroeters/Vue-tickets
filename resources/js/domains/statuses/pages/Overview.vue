@@ -2,5 +2,5 @@
 </script>
 
 <template>
-    <div>statuses/Overview.vue</div>
+    <div>statuses/pages/Overview.vue</div>
 </template>

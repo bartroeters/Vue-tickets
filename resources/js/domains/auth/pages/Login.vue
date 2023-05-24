@@ -2,5 +2,5 @@
 </script>
 
 <template>
-    <div>users/pages/Overview.vue</div>
+    <div>auth/pages/Login.vue</div>
 </template>
