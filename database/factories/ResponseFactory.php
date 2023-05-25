@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class ResponseFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => rand(1, User::count()),
+            'ticket_id' => rand(1, Ticket::count()),
+            'content' => implode(fake()->paragraphs(4) . '&nbsp')
         ];
     }
 }

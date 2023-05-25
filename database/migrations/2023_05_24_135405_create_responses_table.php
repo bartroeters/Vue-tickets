@@ -10,12 +10,16 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('responses', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('responses', function (Blueprint $table) {
+        $table->bigIncrements('id');
+        $table->foreignId('user_id')->cascadeOnDelete();
+        $table->foreignId('ticket_id')->cascadeOnDelete();
+        $table->text('content');
+        $table->timestamps();
+    });
+}
+
 
     /**
      * Reverse the migrations.

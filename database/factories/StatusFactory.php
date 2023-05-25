@@ -16,8 +16,10 @@ class StatusFactory extends Factory
      */
     public function definition(): array
     {
+        $statuses = ['Pending', 'In progress', 'Resolved'];
+
         return [
-            //
+            'title' => fake()->randomStatus($statuses),
         ];
     }
 }
