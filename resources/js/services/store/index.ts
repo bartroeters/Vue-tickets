@@ -9,7 +9,6 @@ export const storeModuleFactory = <T extends {id: number}>(moduleName: string) =
         byId: (id: number) => computed(() => state.value[id]),
     };
     const setters = {
-        /** `Object.freeze` prevents items from being accidentally modified later on. */
         setAll: (items: T[]) => {
             for (const item of items) state.value[item.id] = Object.freeze(item);
         },

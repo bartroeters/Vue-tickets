@@ -18,17 +18,19 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $password = Str::random(10);
+        $timestamp = fake()->dateTimeBetween('-5 years', '-20 minutes');
 
         return [
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => Hash::make($password),
+            'password' => Hash::make(Str::random(7, 14)),
             'is_admin' => fake()->boolean(),
             'remember_token' => Str::random(10),
-            'phonenumber' => fake()->phoneNumber('nl_NL'),
+            'phonenumber' => fake()->unique()->regexify('^06[1-9]{1}[0-9]{7}$'),
+            'created_at' => $timestamp,
+            'updated_at' => $timestamp
         ];
     }
 
