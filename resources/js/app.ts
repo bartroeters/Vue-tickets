@@ -1,5 +1,5 @@
 import '@/bootstrap';
-import { routes } from 'routes';
+import { routes } from './routes';
 import { createApp } from 'vue';
 import App from '@/App.vue';
 import { addRoutes, useRouterInApp } from 'services/router';

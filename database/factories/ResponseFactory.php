@@ -2,9 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Ticket;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,18 +16,7 @@ class ResponseFactory extends Factory
      */
     public function definition(): array
     {
-        $ticket = Ticket::inRandomOrder()
-            ->where('created_at', '<=', Carbon::now())
-            ->first();
-            
-        $user = User::inRandomOrder()
-            ->where('created_at', '<=', Carbon::now())
-            ->first();
-
-        $timestamp = fake()->dateTimeBetween(
-            max($ticket->created_at, $user->created_at),
-            'now'
-        );
+        include "./database/factories/variables/response_factory_variables.php";
 
         return [
             'user_id' => $user->id,
