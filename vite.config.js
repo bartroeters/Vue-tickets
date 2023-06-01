@@ -25,7 +25,11 @@ export default defineConfig({
             'components': path.resolve(__dirname, './resources/js/components'),
             'domains': path.resolve(__dirname, './resources/js/domains'),
             'routes': path.resolve(__dirname, './resources/js/routes'),
-            'services': path.resolve(__dirname, './resources/js/services')
+            'services': path.resolve(__dirname, './resources/js/services'),
+            'get-formatted-content': path.resolve(
+                __dirname,
+                './resources/js/components/shared-components/overview-components/get-formatted-content.ts'
+            ),
         },
     },
 });

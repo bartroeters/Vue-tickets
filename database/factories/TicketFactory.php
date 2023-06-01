@@ -20,8 +20,8 @@ class TicketFactory extends Factory
             'user_id' => $user->id,
             'assignee_id' => $statusId != 1 ? $assignee->id : null,
             'status_id' => $statusId,
-            'title' => Str::remove('.', fake()->unique()->sentence(2, 5)),
-            'content' => implode("\n\n", fake()->paragraphs(rand(1, 4))),
+            'title' => Str::remove('.', fake()->unique()->sentence()),
+            'content' => implode("\n\n", fake()->paragraphs(rand(2, 12))),
             'created_at' => $timestamp,
             'updated_at' =>
                 $statusId === 2 ? fake()->dateTimeBetween($timestamp, 'now') : (

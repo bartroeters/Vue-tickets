@@ -21,7 +21,8 @@
             "components/*": ["./js/components/*"],
             "domains/*": ["./js/domains/*"],
             "routes/*": ["./js/routes/*"],
-            "services/*": ["./js/services/*"]
+            "services/*": ["./js/services/*"],
+            "get-formatted-content/*": ["./js/components/shared-components/overview-components/get-formatted-content.ts"],
         }
     },
     "include": [
