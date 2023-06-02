@@ -3,7 +3,6 @@ import { ticketStore } from '..';
 import TicketList from '../components/TicketList.vue';
 
 const tickets = ticketStore.getters.all;
-
 ticketStore.actions.getAll();
 </script>
 

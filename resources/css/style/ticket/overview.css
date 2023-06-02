@@ -1,0 +1,44 @@
+.overview-table th {
+    font-size: 19px;
+}
+
+.overview-table th.small-width {
+    width: 8%;
+}
+
+.overview-table td:nth-child(2),
+.overview-table td:nth-child(3) {
+    width: 21%;
+}
+
+.overview-table td.small-width {
+    width: 17%;
+}
+
+.overview-table td:nth-child(5) {
+    width: 33%;
+}
+
+.content-text {
+    max-height: 50px;
+    text-transform: none;
+    overflow: hidden;
+}
+
+.content-text.show-more {
+    max-height: none;
+}
+
+.show-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.show-button:hover {
+    background-color: #555;
+}

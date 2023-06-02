@@ -18,10 +18,10 @@ class TicketFactory extends Factory
 
         return [
             'user_id' => $user->id,
-            'assignee_id' => $statusId != 1 ? $assignee->id : null,
+            'assignee_id' => $assignee->is_admin ? $assignee->id : null,
             'status_id' => $statusId,
-            'title' => Str::remove('.', fake()->unique()->sentence()),
-            'content' => implode("\n\n", fake()->paragraphs(rand(2, 12))),
+            'title' => Str::remove('.', fake()->unique()->words(rand(1, 5), true)),
+            'content' => implode("\n\n", fake()->paragraphs(rand(2, 7))),
             'created_at' => $timestamp,
             'updated_at' =>
                 $statusId === 2 ? fake()->dateTimeBetween($timestamp, 'now') : (

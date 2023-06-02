@@ -1,0 +1,29 @@
+.app-container {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+.sticky-navigation {
+  position: sticky;
+  top: 0;
+  margin-bottom: -30px;
+  z-index: 50;
+}
+
+.main-content-container {
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+@media (min-width: 1000px) {
+  .content-container {
+    width: 80%;
+  }
+}

@@ -1,0 +1,32 @@
+.sticky-title {
+    padding: 8px 8px 2px 8px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+  }
+
+.table-wrapper {
+    overflow-y: scroll;
+    top: 0;
+    max-height: calc(100vh - 160px);
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background-color: #202020;
+    color: #fff;
+}
+
+.overview-table th,
+.overview-table td {
+    padding: 8px;
+    border-bottom: 1px solid #444;
+}
+
+.ticket-separator {
+    border-bottom: 3px solid #444;
+}
+
+tr {
+    text-transform: capitalize;
+}

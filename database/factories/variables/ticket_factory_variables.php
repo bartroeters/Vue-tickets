@@ -18,6 +18,7 @@ $timestamp = fake()->dateTimeBetween(
 );
 
 $statusId = rand(1, 100) <= 55 ? 3 : rand(1, 2);
+// $statusId = ($assignee->id === null) ? 1 : rand(2, 3);
 
 return [
     'user' => $user,
