@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
 import Ticket from '../types';
-import { categoryStore } from '../../categories';
+import { categoryStore } from 'domains/categories';
 import { showAllContent, toggleContent, getFormattedContent } from 'get-formatted-content';
-import { userStore } from '../../users';
+import { userStore } from 'domains/users';
 
 const props = defineProps({
   tickets: { type: Array as PropType<Ticket[]> }
 });
 
-const categories = categoryStore.getters.all;
-categoryStore.actions.getAll();
+const getCategoryTitle = (categoryId: number) => {
+  return categoryStore.getters.byId(categoryId).value?.title;
+};
+
+// categoryStore.getters.all;
+// categoryStore.actions.getAll();
 </script>
 
 <template>
@@ -32,23 +36,21 @@ categoryStore.actions.getAll();
         <template v-for="ticket in props.tickets" :key="ticket.id">
           <tr>
             <td class="small-width">{{ ticket.id }}</td>
-            <td>{{ userStore.getters.byId(ticket.user_id).value?.first_name }}</td>
-            <!-- <td>{{ ticket.user_id }}</td> -->
+            <td>{{ userStore.getters.byId(ticket.user_id).value?.last_name }}</td>
             <td>{{ ticket.assignee_id }}</td>
             <td class="small-width">{{ ticket.status_id }}</td>
             <td>{{ ticket.title }}</td>
           </tr>
 
           <tr>
-            <td colspan="6">
-
-            <div class="category-row">
-              <span>Categories:</span>
-
-              <span v-for="category in categories" :key="category.id" class="category">
-                {{ category.title }}
-              </span>
-            </div>
+            <td colspan="5">
+              <div class="category-row">
+                <span>Categories:</span>
+                <span class="category" v-for="(categoryId, index) in ticket.category_ids" :key="index">
+                  <span v-if="index == 0">&nbsp;</span>
+                    {{ getCategoryTitle(categoryId) }},
+                  </span>
+              </div>
             </td>
           </tr>
 

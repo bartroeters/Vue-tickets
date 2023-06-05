@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use App\Models\Status;
 use App\Models\Ticket;
 use Illuminate\Database\Seeder;
 
@@ -14,12 +13,10 @@ class TicketSeeder extends Seeder
      */
     public function run(): void
     {
-        $numberOfCategories = Category::count();
+        Ticket::factory(75)->create()->each(function (Ticket $ticket) {
+            $syncedCategories = Category::inRandomOrder()->pluck('id')->random(rand(1, min(4, Category::count())));
 
-        Ticket::factory(75)->create()->each(function (Ticket $ticket) use ($numberOfCategories) {
-            for ($i = 0; $i < rand(1, $numberOfCategories); $i++) {
-                $ticket->categories()->syncWithoutDetaching(rand(1, $numberOfCategories));
-            }
+            $ticket->categories()->sync($syncedCategories);
         });
     }
 }

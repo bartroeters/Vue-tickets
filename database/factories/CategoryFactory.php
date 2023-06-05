@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => Str::remove('.', fake()->sentence(1, 2))
-        ];
+            'title' => ucfirst(Str::remove('.', fake()->unique()->words(rand(1, 2), true)))
+        ];        
     }
 }

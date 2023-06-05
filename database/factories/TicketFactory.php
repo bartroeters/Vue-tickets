@@ -20,14 +20,10 @@ class TicketFactory extends Factory
             'user_id' => $user->id,
             'assignee_id' => $assignee->is_admin ? $assignee->id : null,
             'status_id' => $statusId,
-            'title' => Str::remove('.', fake()->unique()->words(rand(1, 5), true)),
+            'title' => ucfirst(Str::remove('.', fake()->unique()->words(rand(1, 5), true))),
             'content' => implode("\n\n", fake()->paragraphs(rand(2, 7))),
             'created_at' => $timestamp,
-            'updated_at' =>
-                $statusId === 2 ? fake()->dateTimeBetween($timestamp, 'now') : (
-                $statusId === 3 ? fake()->dateTimeBetween($timestamp, 'now') :
-                $timestamp
-            ),
+            'updated_at' => $statusId == 1 ? $timestamp : fake()->dateTimeBetween($timestamp, 'now')
         ];
     }
 }

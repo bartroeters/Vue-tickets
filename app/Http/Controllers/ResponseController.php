@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Response;
 use App\Http\Requests\StoreResponseRequest;
 use App\Http\Requests\UpdateResponseRequest;
+use App\Http\Resources\ResponseResource;
 
 class ResponseController extends Controller
 {
@@ -13,7 +14,7 @@ class ResponseController extends Controller
      */
     public function index()
     {
-        //
+        return ResponseResource::collection(Response::all());
     }
 
     /**
