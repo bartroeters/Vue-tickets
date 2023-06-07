@@ -4,8 +4,9 @@ import { categoryStore } from 'domains/categories';
 import TicketList from '../components/TicketList.vue';
 
 const tickets = ticketStore.getters.all;
-ticketStore.actions.getAll();
 const categories = categoryStore.getters.all;
+
+ticketStore.actions.getAll();
 categoryStore.actions.getAll();
 </script>
 

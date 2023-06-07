@@ -4,21 +4,28 @@ import Ticket from '../types';
 import { categoryStore } from 'domains/categories';
 import { showAllContent, toggleContent, getFormattedContent } from 'get-formatted-content';
 import { userStore } from 'domains/users';
+import Category from 'domains/categories/types';
 
 const props = defineProps({
-  tickets: { type: Array as PropType<Ticket[]> }
+  tickets: { type: Array as PropType<Ticket[]> },
+  categories: { type: Array as PropType<Category[]> }
 });
 
 const getCategoryTitle = (categoryId: number) => {
   return categoryStore.getters.byId(categoryId).value?.title;
 };
-
-// categoryStore.getters.all;
-// categoryStore.actions.getAll();
 </script>
 
 <template>
-  <h2 class="sticky-title">All tickets ({{ tickets.length }})</h2>
+  <div class="header-wrapper">
+    <h2 class="sticky-title">All tickets ({{ tickets.length }})</h2>
+
+    <button class="create-page-button">
+      <router-link :to="{name: 'tickets.create'}">
+        Create new ticket
+      </router-link>
+    </button>
+  </div>
 
   <div class="table-wrapper">
     <table class="overview-table">
@@ -46,23 +53,41 @@ const getCategoryTitle = (categoryId: number) => {
             <td colspan="5">
               <div class="category-row">
                 <span>Categories:</span>
+
                 <span class="category" v-for="(categoryId, index) in ticket.category_ids" :key="index">
-                  <span v-if="index == 0">&nbsp;</span>
-                    {{ getCategoryTitle(categoryId) }},
-                  </span>
+                  <span v-if="index === 0">&nbsp;</span>
+                  <span>{{ getCategoryTitle(categoryId) }}</span>
+                  <span v-if="index !== ticket.category_ids.length - 1">,&nbsp;</span>
+                </span>
               </div>
             </td>
           </tr>
 
-          <tr class="ticket-separator">
-            <td colspan="6">
-              <div class="content-text" :class="{ 'show-more': showAllContent[ticket.id] }">
-                {{ getFormattedContent(ticket.content) }}
-              </div>
+          <tr class="table-row-separator">
+            <td colspan="5">
+              <span class="button-wrapper">
+                <div class="content-text" :class="{ 'show-more': showAllContent[ticket.id] }">
+                  {{ getFormattedContent(ticket.content) }}
+                </div>
 
-              <button v-if="ticket.content.length" @click="toggleContent(ticket.id)" class="show-button">
-                {{ showAllContent[ticket.id] ? 'Show less' : 'Show more' }}
-              </button>
+                <button v-if="ticket.content.length" @click="toggleContent(ticket.id)" class="collapse-content-button">
+                  {{ showAllContent[ticket.id] ? '&uarr; Show less' : 'Show more &darr;' }}
+                </button>
+                
+                <span>
+                  <button class="show-page-button">
+                    <router-link :to="{name: 'tickets.show', params: {id: ticket.id}}">
+                      &rarr; Read all
+                    </router-link>
+                  </button>
+
+                  <button class="edit-page-button">
+                    <router-link :to="{name: 'tickets.edit', params: {id: ticket.id}}">
+                      Edit ticket
+                    </router-link>
+                  </button>
+                </span>
+              </span>
             </td>
           </tr>
         </template>

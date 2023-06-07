@@ -23,7 +23,7 @@ class TicketFactory extends Factory
             'title' => ucfirst(Str::remove('.', fake()->unique()->words(rand(1, 5), true))),
             'content' => implode("\n\n", fake()->paragraphs(rand(2, 7))),
             'created_at' => $timestamp,
-            'updated_at' => $statusId == 1 ? $timestamp : fake()->dateTimeBetween($timestamp, 'now')
+            'updated_at' => $statusId === 1 ? $timestamp : fake()->dateTimeBetween($timestamp, 'now')
         ];
     }
 }

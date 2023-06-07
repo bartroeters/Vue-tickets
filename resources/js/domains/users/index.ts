@@ -1,12 +1,14 @@
 import User from './types';
 import { storeModuleFactory } from 'services/store';
-import OverviewPage from './pages/Overview.vue';
-import { createOverviewRoute } from 'services/router/factory';
+import { createOverviewRoute, createShowRoute } from 'services/router/factory';
+import OverviewVue from './pages/Overview.vue';
+import ShowVue from './pages/Show.vue';
 
-export const TICKET_DOMAIN_NAME = 'users';
+export const USER_DOMAIN_NAME = 'users';
 
-export const userStore = storeModuleFactory<User>(TICKET_DOMAIN_NAME);
+export const userStore = storeModuleFactory<User>(USER_DOMAIN_NAME);
 
 export const userRoutes = [
-    createOverviewRoute(TICKET_DOMAIN_NAME, OverviewPage)
+    createOverviewRoute(USER_DOMAIN_NAME, OverviewVue),
+    createShowRoute(USER_DOMAIN_NAME, ShowVue)
 ];

@@ -1,13 +1,31 @@
-.sticky-title {
-    padding: 8px 8px 2px 8px;
-    text-transform: capitalize;
-    letter-spacing: 1px;
-  }
+/* Containers */
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .table-wrapper {
     overflow-y: scroll;
     top: 0;
     max-height: calc(100vh - 160px);
+}
+
+.button-wrapper {
+    display: block;
+}
+
+.button-wrapper button {
+    margin: 5px 0 0 0;
+}
+
+/* Sticky elements */
+.sticky-title {
+    padding: 0 0 0 10px;
+    text-transform: capitalize;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
 }
 
 thead {
@@ -17,12 +35,82 @@ thead {
     color: #fff;
 }
 
-.overview-table th,
+/* Table */
 .overview-table td {
     padding: 8px;
+    letter-spacing: .5px;
     border-bottom: 1px solid #444;
 }
 
-.ticket-separator {
+.overview-table th {
+    padding: 8px;
+    font-size: 19px;
+    letter-spacing: 1.3px;
+}
+
+.table-row-separator {
     border-bottom: 3px solid #444;
+}
+
+/* Buttons */
+.collapse-content-button,
+.edit-page-button,
+.show-page-button {
+    float: right;
+    padding: 3px 10px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.collapse-content-button *,
+.edit-page-button *,
+.show-page-button * {
+    color: #fff;
+    text-decoration: none;
+}
+
+.create-page-button {
+    margin: -5px 0 0 0;
+    background-color: #fff;
+    border: none;
+    padding: 4px 12px;
+    font-size: 13.1px;
+    letter-spacing: .5px;
+    border-radius: 5%;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.create-page-button * {
+    color: #333;
+    text-decoration: none;
+}
+
+.collapse-content-button {
+    float: left;
+    color: #fff;
+    background-color: #777;
+    margin-left: 10px;
+}
+
+.edit-page-button {
+    background-color: #555;
+}
+
+.show-page-button {
+    background-color: #333;
+}
+
+.create-page-button:hover,
+.edit-page-button:hover,
+.show-page-button:hover {
+    background-color: #888;
+}
+
+.create-page-button:hover * {
+    color: #fff;
+}
+
+.collapse-content-button:hover {
+    background-color: #999;
 }
