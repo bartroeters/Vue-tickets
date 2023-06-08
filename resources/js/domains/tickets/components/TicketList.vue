@@ -19,7 +19,7 @@ const getCategoryTitle = (categoryId: number) => {
 <template>
   <div class="header-wrapper">
     <h2 class="sticky-title">All tickets ({{ tickets.length }})</h2>
-
+    
     <button class="create-page-button">
       <router-link :to="{name: 'tickets.create'}">
         Create new ticket
@@ -70,7 +70,7 @@ const getCategoryTitle = (categoryId: number) => {
                   {{ getFormattedContent(ticket.content) }}
                 </div>
 
-                <button v-if="ticket.content.length" @click="toggleContent(ticket.id)" class="collapse-content-button">
+                <button v-if="ticket.content.length" @click="toggleContent(ticket.id)" class="toggle-content-button">
                   {{ showAllContent[ticket.id] ? '&uarr; Show less' : 'Show more &darr;' }}
                 </button>
                 

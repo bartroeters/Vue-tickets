@@ -5,6 +5,6 @@ export default interface User {
     email: string
     password: string
     is_admin: boolean
-    telephonenumber: number
-    // inviteToken: string;
+    phonenumber: number
+    inviteToken: string;
 };

@@ -27,5 +27,5 @@ ticketStore.actions.getAll();
 </template>
 
 <style>
-@import 'style/shared/show.css';
+/* @import 'style/shared/show.css'; */
 </style>

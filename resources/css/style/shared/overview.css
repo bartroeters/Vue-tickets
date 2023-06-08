@@ -53,7 +53,7 @@ thead {
 }
 
 /* Buttons */
-.collapse-content-button,
+.toggle-content-button,
 .edit-page-button,
 .show-page-button {
     float: right;
@@ -62,7 +62,7 @@ thead {
     cursor: pointer;
 }
 
-.collapse-content-button *,
+.toggle-content-button *,
 .edit-page-button *,
 .show-page-button * {
     color: #fff;
@@ -86,7 +86,7 @@ thead {
     text-decoration: none;
 }
 
-.collapse-content-button {
+.toggle-content-button {
     float: left;
     color: #fff;
     background-color: #777;
@@ -111,6 +111,6 @@ thead {
     color: #fff;
 }
 
-.collapse-content-button:hover {
+.toggle-content-button:hover {
     background-color: #999;
 }

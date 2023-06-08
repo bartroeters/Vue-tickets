@@ -22,8 +22,8 @@
   margin: 0 auto;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1145px) {
   .content-container {
-    width: 80%;
+    width: 85%;
   }
 }
