@@ -21,7 +21,7 @@ class TicketFactory extends Factory
             'assignee_id' => $assignee->is_admin ? $assignee->id : null,
             'status_id' => $statusId,
             'title' => ucfirst(Str::remove('.', fake()->unique()->words(rand(1, 5), true))),
-            'content' => implode("\n\n", fake()->paragraphs(rand(2, 24))),
+            'content' => implode("\n\n", fake()->paragraphs(rand(2, 16))),
             'created_at' => $timestamp,
             'updated_at' => $statusId === 1 ? $timestamp : fake()->dateTimeBetween($timestamp, 'now')
         ];

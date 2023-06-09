@@ -16,12 +16,12 @@
     width: 33%;
 }
 
-.content-text {
+.formatted-content {
     max-height: 41px;
     overflow: hidden;
     font-size: 13px;
 }
 
-.content-text.show-more {
+.formatted-content.show-more {
     max-height: none;
 }

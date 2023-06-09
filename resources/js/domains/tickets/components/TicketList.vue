@@ -18,9 +18,9 @@ const getCategoryTitle = (categoryId: number) => {
 
 <template>
   <div class="header-wrapper">
-    <h2 class="sticky-title">All tickets ({{ tickets.length }})</h2>
+    <h2>All tickets ({{ tickets.length }})</h2>
     
-    <button class="create-page-button">
+    <button class="link-to-create-page">
       <router-link :to="{name: 'tickets.create'}">
         Create new ticket
       </router-link>
@@ -32,7 +32,7 @@ const getCategoryTitle = (categoryId: number) => {
       <thead>
         <tr>
           <th class="small-width">ID</th>
-          <th>User</th>
+          <th>Submitter</th>
           <th>Assignee</th>
           <th class="small-width">Status</th>
           <th>Title</th>
@@ -66,7 +66,7 @@ const getCategoryTitle = (categoryId: number) => {
           <tr class="table-row-separator">
             <td colspan="5">
               <span class="button-wrapper">
-                <div class="content-text" :class="{ 'show-more': showAllContent[ticket.id] }">
+                <div class="formatted-content" :class="{ 'show-more': showAllContent[ticket.id] }">
                   {{ getFormattedContent(ticket.content) }}
                 </div>
 
@@ -75,13 +75,13 @@ const getCategoryTitle = (categoryId: number) => {
                 </button>
                 
                 <span>
-                  <button class="show-page-button">
+                  <button class="link-to-show-page">
                     <router-link :to="{name: 'tickets.show', params: {id: ticket.id}}">
                       &rarr; Read all
                     </router-link>
                   </button>
 
-                  <button class="edit-page-button">
+                  <button class="link-to-edit-page">
                     <router-link :to="{name: 'tickets.edit', params: {id: ticket.id}}">
                       Edit ticket
                     </router-link>
