@@ -25,3 +25,30 @@
 .formatted-content.show-more {
     max-height: none;
 }
+
+.category-row * {
+    font-size: 13px;
+}
+
+.category {
+    display: inline-block;
+    margin-right: 5px;
+    background-color: #f0f0f0;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+.category a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.category-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+.date {
+    margin-left: auto;
+}

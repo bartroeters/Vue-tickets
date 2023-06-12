@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\StatusController;
@@ -24,13 +25,13 @@ Route::post('reset-password', [AuthController::class, 'updatePassword']);
 Route::get('get-user-to-register/{user:invite_token}', [AuthController::class, 'userToRegister']);
 Route::post('register/{user:invite_token}', [AuthController::class, 'register']);
 
-Route::resource('categories', CategoryController::class);
-Route::resource('responses', ResponseController::class);
-Route::resource('statuses', StatusController::class);
-Route::resource('tickets', TicketController::class);
-Route::resource('users', UserController::class);
-
 Route::middleware(['auth'])->group(function () {
+    Route::resource('categories', CategoryController::class);
+    Route::resource('responses', ResponseController::class);
+    Route::resource('statuses', StatusController::class);
+    Route::resource('tickets', TicketController::class);
+    Route::resource('users', UserController::class);
+
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('me', [AuthController::class, 'me']);
 });

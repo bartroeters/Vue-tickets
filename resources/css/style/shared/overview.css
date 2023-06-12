@@ -38,13 +38,14 @@ thead {
 /* Table */
 .overview-table td {
     padding: 8px;
+    font-size: 14px;
     letter-spacing: .5px;
     border-bottom: 1px solid #444;
 }
 
 .overview-table th {
     padding: 8px;
-    font-size: 19px;
+    font-size: 17px;
     letter-spacing: 1.3px;
 }
 
@@ -69,7 +70,8 @@ thead {
     text-decoration: none;
 }
 
-.link-to-create-page {
+.link-to-create-page,
+.sort-button {
     margin: -5px 0 0 0;
     background-color: #fff;
     border: none;
@@ -81,7 +83,8 @@ thead {
     cursor: pointer;
 }
 
-.link-to-create-page * {
+.link-to-create-page *,
+.sort-button * {
     color: #333;
     text-decoration: none;
 }
@@ -103,11 +106,16 @@ thead {
 
 .link-to-create-page:hover,
 .link-to-edit-page:hover,
-.link-to-show-page:hover {
+.link-to-show-page:hover,
+.sort-button:hover {
     background-color: #888;
 }
 
 .link-to-create-page:hover * {
+    color: #fff;
+}
+
+.sort-button:hover {
     color: #fff;
 }
 

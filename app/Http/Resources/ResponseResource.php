@@ -19,10 +19,10 @@ class ResponseResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'ticket_id' => $this->ticket_id,
+            'userId' => $this->user_id,
+            'ticketId' => $this->ticket_id,
             'content' => $this->content,
-            'created_at' => $this->created_at
+            'createdAt' => $this->created_at
         ];
     }
 }

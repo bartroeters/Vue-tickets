@@ -11,25 +11,25 @@ import ResetPassword from './pages/ResetPassword.vue';
 
 export const authRoutes = [
     {
-        path: '/',
+        path: '/login',
         name: 'Login',
         component: Login,
         meta: {auth: false, canSeeWhenLoggedIn: false},
     },
     {
-        path: '/wachtwoord-vergeten/:token/:email',
+        path: '/forgot-password/:token/:email',
         name: 'resetPassword',
         component: ResetPassword,
         meta: {auth: false, canSeeWhenLoggedIn: false},
     },
     {
-        path: '/wachtwoord-vergeten',
+        path: '/forgot-password',
         name: 'forgotPassword',
         component: RequestResetPassword,
         meta: {auth: false, canSeeWhenLoggedIn: false},
     },
     {
-        path: '/registreren/:token',
+        path: '/registrer/:token',
         name: 'register',
         component: Register,
         meta: {auth: false, canSeeWhenLoggedIn: false},
@@ -55,7 +55,7 @@ export const logout = async () => {
 export const me = async () => {
     const {data} = await getRequest('me');
     if (!data) return;
-    loggedInUser.value = data;
+    loggedInUser.value = data.user;
 };
 
 export const checkIfLoggedIn = async () => {
@@ -65,14 +65,14 @@ export const checkIfLoggedIn = async () => {
 
 export const goToLoginPage = () => goToRoute('Login', undefined);
 
-registerBeforeRouteMiddleware(({meta}) => {
-    if (!isLoggedIn.value && meta?.auth) {
-        goToLoginPage();
-        return true;
-    }
-    if (isLoggedIn.value && !meta?.canSeeWhenLoggedIn) {
-        goToOverviewPage(TICKET_DOMAIN_NAME);
-        return true;
-    }
-    return false;
-});
+// registerBeforeRouteMiddleware(({meta}) => {
+//     if (!isLoggedIn.value && meta?.auth) {
+//         goToLoginPage();
+//         return true;
+//     }
+//     if (isLoggedIn.value && !meta?.canSeeWhenLoggedIn) {
+//         goToOverviewPage(TICKET_DOMAIN_NAME);
+//         return true;
+//     }
+//     return false;
+// });

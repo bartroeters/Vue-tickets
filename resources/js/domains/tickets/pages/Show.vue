@@ -33,7 +33,7 @@ responseStore.actions.getAll();
       <div class="categories-wrapper">
         <h6>Categories</h6>
 
-        <div class="category" v-for="(categoryId, index) in ticket.category_ids" :key="index">
+        <div class="category" v-for="(categoryId, index) in ticket.categoryIds" :key="index">
           <router-link :to="{name: 'categories.overview'}">
             {{ getCategoryTitle(categoryId) }}
           </router-link>
@@ -43,14 +43,14 @@ responseStore.actions.getAll();
       <div>
         <div class="status-wrapper">
           <div>Status:&nbsp;</div>
-          <div class="italic-font">{{ getStatusTitle(ticket.status_id) }}</div>
+          <div class="italic-font">{{ getStatusTitle(ticket.statusId) }}</div>
         </div>
 
         <div class="name-wrapper">
           <div>Submitted by:&nbsp</div>
           <div class="italic-font">
             <router-link :to="{name: `users.overview`}">
-              {{ getUserFullName(ticket.user_id) }}
+              {{ getUserFullName(ticket.userId) }}
             </router-link>
           </div>
         </div>
@@ -71,13 +71,13 @@ responseStore.actions.getAll();
 
               <span class="italic-font">
                 <router-link :to="{name: `users.overview`}">
-                  {{ getUserFullName(response.user_id) }}
+                  {{ getUserFullName(response.userId) }}
                 </router-link>
               </span>
 
               <span>, uploaded:&nbsp;</span>
 
-              <span>{{ response.created_at }}</span>
+              <span>{{ response.createdAt }}</span>
             </div>
         </div>
 

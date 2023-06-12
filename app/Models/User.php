@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Http\Notification\ResetPassword as ResetPasswordNotification;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as AuthCanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+
+class User extends BaseModel implements JWTSubject, AuthenticatableContract, AuthCanResetPassword
 {
-    use HasFactory, Notifiable;
+    use Authenticatable, HasFactory, Notifiable, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -63,6 +68,16 @@ class User extends Authenticatable
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    /**
+     * Return full name.
+     *
+     * @return void
+     */
+    public function getNameAttribute()
+    {
+        return trim($this->firstName." ".$this->LastName);
     }
 
     public function createdTickets()

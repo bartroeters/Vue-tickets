@@ -1,30 +1,32 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
 import Ticket from '../types';
-import { categoryStore } from 'domains/categories';
 import { showAllContent, toggleContent, getFormattedContent } from 'get-formatted-content';
-import { userStore } from 'domains/users';
 import Category from 'domains/categories/types';
+import { getCategoryTitle, getUserFullName, getStatusTitle } from '..';
+import { userStore } from '../../users';
+import { statusStore } from '../../statuses';
 
 const props = defineProps({
   tickets: { type: Array as PropType<Ticket[]> },
   categories: { type: Array as PropType<Category[]> }
 });
 
-const getCategoryTitle = (categoryId: number) => {
-  return categoryStore.getters.byId(categoryId).value?.title;
-};
+userStore.actions.getAll();
+statusStore.actions.getAll();
 </script>
 
 <template>
   <div class="header-wrapper">
     <h2>All tickets ({{ tickets.length }})</h2>
-    
-    <button class="link-to-create-page">
-      <router-link :to="{name: 'tickets.create'}">
-        Create new ticket
-      </router-link>
-    </button>
+
+    <div>
+      <button class="link-to-create-page">
+        <router-link :to="{name: 'tickets.create'}">
+          Create new ticket
+        </router-link>
+      </button>
+    </div>
   </div>
 
   <div class="table-wrapper">
@@ -43,22 +45,32 @@ const getCategoryTitle = (categoryId: number) => {
         <template v-for="ticket in props.tickets" :key="ticket.id">
           <tr>
             <td class="small-width">{{ ticket.id }}</td>
-            <td>{{ userStore.getters.byId(ticket.user_id).value?.last_name }}</td>
-            <td>{{ ticket.assignee_id }}</td>
-            <td class="small-width">{{ ticket.status_id }}</td>
+            <td>
+              <router-link :to="{name: 'users.overview'}">
+                {{ getUserFullName(ticket.userId) }}
+              </router-link>
+            </td>
+            <td>
+              <router-link :to="{name: 'users.overview'}">
+                {{ getUserFullName(ticket.assigneeId) }}
+              </router-link>
+            </td>
+            <td class="small-width">{{ getStatusTitle(ticket.statusId) }}</td>
             <td>{{ ticket.title }}</td>
           </tr>
-
+          
           <tr>
             <td colspan="5">
               <div class="category-row">
-                <span>Categories:</span>
+                <span>Categories:&nbsp;</span>
 
-                <span class="category" v-for="(categoryId, index) in ticket.category_ids" :key="index">
-                  <span v-if="index === 0">&nbsp;</span>
-                  <span>{{ getCategoryTitle(categoryId) }}</span>
-                  <span v-if="index !== ticket.category_ids.length - 1">,&nbsp;</span>
-                </span>
+                <div class="category" v-for="(categoryId, index) in ticket.categoryIds" :key="index">
+                  <router-link :to="{name: 'categories.overview'}">
+                    {{ getCategoryTitle(categoryId) }}
+                  </router-link>
+                </div>
+
+                <span class="date">{{ new Date(ticket.createdAt).toLocaleString() }}</span>
               </div>
             </td>
           </tr>

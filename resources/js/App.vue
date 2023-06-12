@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TheNavigation from 'components/TheNavigation.vue';
+import { isLoggedIn } from './domains/auth';
 </script>
 
 <template>

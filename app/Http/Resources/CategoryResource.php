@@ -20,7 +20,7 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'ticket_ids' => $this->tickets->pluck('id'),
+            'ticketIds' => $this->tickets->pluck('id'),
         ];
     }
 }

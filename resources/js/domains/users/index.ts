@@ -12,3 +12,9 @@ export const userRoutes = [
     createOverviewRoute(USER_DOMAIN_NAME, OverviewVue),
     createShowRoute(USER_DOMAIN_NAME, ShowVue)
 ];
+
+export const getUserFullName = (userId: number) => {
+    const firstName = userStore.getters.byId(userId).value?.firstName;
+    const lastName = userStore.getters.byId(userId).value?.lastName;
+    return `${firstName} ${lastName}`;
+};

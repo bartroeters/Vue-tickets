@@ -7,14 +7,14 @@ import { goToRoute } from 'services/router';
 
 const ticket = ref<Ticket> ({
     id: NaN,
-    user_id: NaN,
-    assignee_id: NaN,
-    status_id: NaN,
+    userId: NaN,
+    assigneeId: NaN,
+    statusId: NaN,
     title: "",
     content: "",
-    created_at: "",
-    updated_at: "",
-    category_ids: []
+    createdAt: "",
+    updatedAt: "",
+    categoryIds: []
 });
 
 const createTicket = async (ticketData: Ticket) => {

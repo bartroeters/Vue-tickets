@@ -19,13 +19,13 @@ class UserOverview extends JsonResource
     {
         return [
             'id' => $this->id,
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
+            'firstName' => $this->first_name,
+            'lastName' => $this->last_name,
             'email' => $this->email,
-            'is_admin' => $this->is_admin,
+            'isAdmin' => $this->is_admin,
             'phonenumber' => $this->phonenumber,
             'inviteToken' => $this->inviteToken,
-            'created_at' => $this->created_at
+            'createdAt' => $this->created_at
         ];
     }
 }

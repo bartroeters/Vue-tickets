@@ -65,61 +65,6 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-## Database Design
+## TODO
 
-Table users {
-  id int [pk]
-  first_name varchar
-  last_name varchar
-  email varchar
-  password varchar
-  is_admin bool
-  phonenumber number
-  created_at timestamp
-  updated_at timestamp
-}
-
-Table tickets {
-  id int [pk]
-  user_id int
-  status_id int
-  title varchar
-  content varchar
-  created_at timestamp
-  updated_at timestamp
-}
-
-Table categories {
-  id int [pk]
-  title varchar
-  created_at timestamp
-  updated_at timestamp
-}
-
-Table category_ticket {
-  id int [pk]
-  ticket_id int
-  category_id int
-}
-
-Table statuses {
-  id int [pk]
-  title varchar
-  created_at timestamp
-  updated_at timestamp
-}
-
-Table responses {
-  id int [pk]
-  admin_id int [ref: - users.id]
-  content varchar
-  created_at timestamp
-  updated_at timestamp
-}
-
-Ref: tickets.user_id > users.id
-// Ref: responses.admin_id > users.id
-Ref: category_ticket.ticket_id > tickets.id
-Ref: category_ticket.category_id > categories.id
-Ref: statuses.id < tickets.status_id
-Ref: "tickets"."id" < "responses"."id"
+Order tickets chronologically.

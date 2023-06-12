@@ -64,11 +64,11 @@ class AuthController extends Controller
             'status' => 'success',
             'user' => new LoggedInUserResource($user),
         ];
-        $secureCookie = config('app.env') === 'production';
 
+        $secureCookie = config('app.env') === 'production';
+        
         return (new JsonResponse($responseData, Response::HTTP_OK))
             ->cookie(self::COOKIE_NAME, "Bearer {$token}", 60 * 24 * 30, '/', '', $secureCookie, true);
-        // return $this->respondWithToken($token);
     }
 
     /**

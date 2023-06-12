@@ -19,15 +19,14 @@ class TicketResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'assignee_id' => $this->assignee_id,
-            'status_id' => $this->status_id,
+            'userId' => $this->user_id,
+            'assigneeId' => $this->assignee_id,
+            'statusId' => $this->status_id,
             'title' => $this->title,
             'content' => $this->content,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'category_ids' => $this->categories->pluck('id'),
-            'status' => new StatusResource($this->status)
+            'createdAt' => $this->created_at,
+            'updatedAt' => $this->updated_at,
+            'categoryIds' => $this->categories->pluck('id')
         ];
     }
 }

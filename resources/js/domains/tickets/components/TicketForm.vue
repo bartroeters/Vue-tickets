@@ -27,17 +27,17 @@
 
         <div>
           <label for="user">User:</label>
-          <input name="user" id="user" v-model="ticketData.user_id" />
+          <input name="user" id="user" v-model="ticketData.userId" />
         </div>
 
         <div>
           <label for="assignee">Assignee:</label>
-          <input name="assignee" id="assignee" v-model="ticketData.assignee_id" />
+          <input name="assignee" id="assignee" v-model="ticketData.assigneeId" />
         </div>
 
         <div>
           <label for="status">Status:</label>
-          <input name="status" id="status" v-model="ticketData.status_id" />
+          <input name="status" id="status" v-model="ticketData.statusId" />
         </div>
 
         <div>
@@ -53,7 +53,7 @@
 
         <div>
           <label for="categories">Categories:</label>
-          <select name="categories" id="categories" v-model="ticketData.category_ids" multiple>
+          <select name="categories" id="categories" v-model="ticketData.categoryIds" multiple>
             <option v-for="category in categories" :value="category.id" :key="category.id">
               {{ category.title }}
             </option>
