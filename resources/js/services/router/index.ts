@@ -1,6 +1,14 @@
 import {App} from 'vue';
 import {CREATE_PAGE_NAME, EDIT_PAGE_NAME, OVERVIEW_PAGE_NAME, SHOW_PAGE_NAME} from './factory';
-import { createRouter, createWebHistory, LocationQueryRaw, NavigationGuard, NavigationHookAfter, RouteLocationRaw, RouteRecordRaw } from 'vue-router';
+import {
+    LocationQueryRaw,
+    NavigationGuard,
+    NavigationHookAfter,
+    RouteLocationRaw,
+    RouteRecordRaw,
+    createRouter,
+    createWebHistory,
+} from 'vue-router';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -11,7 +19,7 @@ export const addRoutes = (routes: RouteRecordRaw[]) => {
     for (const route of routes) router.addRoute(route);
 };
 
-export const useRouterInApp = (app: App<unknown>) => app.use(router);
+export const useRouterInApp = (app: App<Element>) => app.use(router);
 
 const createRoute = (name: string, id?: number, query?: LocationQueryRaw) => {
     const route: RouteLocationRaw = {name};
@@ -25,7 +33,6 @@ export const goToRoute = (name: string, id?: number, query?: LocationQueryRaw) =
     router.push(createRoute(name, id, query));
 };
 
-/** `NavigationGuard[]` performs additional checks or actions before the navigation takes place. */
 const beforeRouteMiddleware: NavigationGuard[] = [
     (to, from) => {
         const fromQuery = from.query.from;
@@ -51,9 +58,13 @@ export const registerBeforeRouteMiddleware = (middleware: NavigationGuard) => be
 const routerAfterMiddleware: NavigationHookAfter[] = [];
 export const registerAfterMiddleware = (middleware: NavigationHookAfter) => routerAfterMiddleware.push(middleware);
 
+/** Go to the show page for the given module name */
 export const goToShowPage = (moduleName: string, id: number) => goToRoute(moduleName + SHOW_PAGE_NAME, id);
+/** Go to the edit page for the given module name */
 export const goToEditPage = (moduleName: string, id: number) => goToRoute(moduleName + EDIT_PAGE_NAME, id);
+/** Go to the create page for the given module name */
 export const goToCreatePage = (moduleName: string) => goToRoute(moduleName + CREATE_PAGE_NAME);
+/** Go to the overview page for the given module name */
 export const goToOverviewPage = (moduleName: string) => goToRoute(moduleName + OVERVIEW_PAGE_NAME);
 
 /** Get the current route */

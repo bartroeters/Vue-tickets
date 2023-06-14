@@ -36,7 +36,7 @@ export const authRoutes = [
     },
 ];
 
-const loggedInUser = ref<User | null>(null);
+export const loggedInUser = ref<User | null>(null);
 
 export const isLoggedIn = computed(() => loggedInUser.value !== null);
 export const getLoggedInUser = computed(() => loggedInUser.value);

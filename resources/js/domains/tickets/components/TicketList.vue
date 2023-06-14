@@ -1,15 +1,20 @@
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType, onMounted } from 'vue';
 import Ticket from '../types';
-import { showAllContent, toggleContent, getFormattedContent } from 'get-formatted-content';
+import { showAllContent, toggleContent, getFormattedContent } from 'shared-components/get-formatted-content';
 import Category from 'domains/categories/types';
 import { getCategoryTitle, getUserFullName, getStatusTitle } from '..';
-import { userStore } from '../../users';
-import { statusStore } from '../../statuses';
+import { userStore } from 'domains/users';
+import { statusStore } from 'domains/statuses';
+import { loggedInUser } from 'domains/auth';
 
 const props = defineProps({
   tickets: { type: Array as PropType<Ticket[]> },
   categories: { type: Array as PropType<Category[]> }
+});
+
+onMounted(() => {
+  console.log('Logged in user:', loggedInUser.value);
 });
 
 userStore.actions.getAll();
@@ -45,17 +50,23 @@ statusStore.actions.getAll();
         <template v-for="ticket in props.tickets" :key="ticket.id">
           <tr>
             <td class="small-width">{{ ticket.id }}</td>
+
             <td>
               <router-link :to="{name: 'users.overview'}">
                 {{ getUserFullName(ticket.userId) }}
               </router-link>
             </td>
+
             <td>
-              <router-link :to="{name: 'users.overview'}">
+              <router-link v-if="ticket.assigneeId !== null" :to="{name: 'users.overview'}">
                 {{ getUserFullName(ticket.assigneeId) }}
               </router-link>
+
+              <span v-else class="italic-font">No assignee yet</span>
             </td>
+
             <td class="small-width">{{ getStatusTitle(ticket.statusId) }}</td>
+
             <td>{{ ticket.title }}</td>
           </tr>
           

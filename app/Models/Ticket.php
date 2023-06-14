@@ -9,9 +9,9 @@ class Ticket extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'assignee_id',
-        'status_id',
+        'userId',
+        'assigneeId',
+        'statusId',
         'title',
         'content'
     ];
@@ -23,7 +23,7 @@ class Ticket extends BaseModel
 
     public function assignee()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'userId');
     }
 
     public function status()

@@ -19,7 +19,7 @@ const ticket = ref<Ticket> ({
 
 const createTicket = async (ticketData: Ticket) => {
     await ticketStore.actions.create(ticketData);
-    goToRoute('ticket.overview');
+    goToRoute('tickets.overview');
 };
 </script>
 

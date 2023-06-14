@@ -21,8 +21,7 @@ class ResponseResource extends JsonResource
             'id' => $this->id,
             'userId' => $this->user_id,
             'ticketId' => $this->ticket_id,
-            'content' => $this->content,
-            'createdAt' => $this->created_at
+            'content' => $this->content
         ];
     }
 }

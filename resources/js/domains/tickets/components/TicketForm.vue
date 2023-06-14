@@ -1,72 +1,69 @@
-  <script setup lang="ts">
-  import Ticket from '../types';
-  import { ref } from 'vue';
-  import { categoryStore } from 'domains/categories';
+<script setup lang="ts">
+import Ticket from '../types';
+import { ref } from 'vue';
+import { categoryStore } from 'domains/categories';
+import { resizeTextarea } from 'components/form/resize-text-area';
+import { useRoute } from 'vue-router';
 
-  const props = defineProps({
-    ticket: { type: Object as () => Ticket }
-  });
+const props = defineProps({
+  ticket: { type: Object as () => Ticket }
+});
 
-  defineEmits(['submitTicket']);
+defineEmits(['submitTicket']);
 
-  const ticketData = ref({ ...props.ticket });
+const categories = categoryStore.getters.all;
+categoryStore.actions.getAll();
 
-  const categories = categoryStore.getters.all;
-  categoryStore.actions.getAll();
-  </script>
+const createTicket: boolean = useRoute().name === "tickets.create";
 
-  <template>
-    <h2 class="form-title">Ticket Form</h2>
+const ticketData = ref({
+  ...props.ticket,
+  userId: createTicket ? 1 : props.ticket?.userId,
+  assigneeId: null,
+  statusId: 1
+});
+</script>
 
-    <div class="form-wrapper">
-      <form @submit.prevent="$emit('submitTicket', ticketData)">
-        <div>
-          <label for="title">Title:</label>
-          <input name="title" id="title" v-model="ticketData.title" />
-        </div>
+<template>
+  <h2 class="form-title">Add ticket</h2>
 
-        <div>
-          <label for="user">User:</label>
-          <input name="user" id="user" v-model="ticketData.userId" />
-        </div>
+  <div class="form-wrapper">
+    <form @submit.prevent="$emit('submitTicket', ticketData)">
+      <div>
+        <label for="title">Title:</label>
 
-        <div>
-          <label for="assignee">Assignee:</label>
-          <input name="assignee" id="assignee" v-model="ticketData.assigneeId" />
-        </div>
+        <input name="title" id="title" v-model="ticketData.title" />
+      </div>
 
-        <div>
-          <label for="status">Status:</label>
-          <input name="status" id="status" v-model="ticketData.statusId" />
-        </div>
+      <div>
+        <label for="content">Content:</label>
 
-        <div>
-          <label for="content">Content:</label>
-          <textarea
-            name="content"
-            id="content"
-            @input="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
-            v-model="ticketData.content"
-            style="width: 600px;">
-          </textarea>
-        </div>
+        <textarea
+          name="content"
+          id="content"
+          @input="resizeTextarea"
+          v-model="ticketData.content"
+          style="width: 600px; resize: vertical;"
+        ></textarea>
+      </div>
 
-        <div>
-          <label for="categories">Categories:</label>
-          <select name="categories" id="categories" v-model="ticketData.categoryIds" multiple>
-            <option v-for="category in categories" :value="category.id" :key="category.id">
-              {{ category.title }}
-            </option>
-          </select>
-        </div>
+      <div>
+        <label for="categories">Categories:</label>
+        
+        <select name="categories" id="categories" v-model="ticketData.categoryIds" multiple>
+          <option v-for="category in categories" :value="category.id" :key="category.id">
+            {{ category.title }}
+          </option>
+        </select>
+      </div>
 
-        <div class="button-wrapper">
-          <button>Submit</button>
-        </div>
-      </form>
-    </div>
-  </template>
+      <div class="button-wrapper">
+        <button>Submit</button>
+      </div>
+    </form>
+  </div>
+</template>
 
-  <style scoped>
-  @import 'style/shared/form.css';
-  </style>
+<style scoped>
+@import 'style/shared/form.css';
+</style>

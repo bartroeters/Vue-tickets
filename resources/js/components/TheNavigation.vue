@@ -1,4 +1,8 @@
-<template>
+<script setup lang="ts">
+import { isLoggedIn, logout } from '../domains/auth';
+</script>
+
+<template class="navigation-bar">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <div>
@@ -33,42 +37,30 @@
                             active-class="active-link"
                             aria-current="page"
                             >
-                            tickets/pages/Overview.vue
+                            Ticket Overview
                         </router-link>
                     </li>
 
-                    <li class="nav-item">
+                    <li v-if="!isLoggedIn" class="nav-item">
                         <router-link
-                            :to="{name: 'users.overview'}"
+                            :to="{name: 'Login'}"
                             class="nav-link active router-link-exact-active"
                             active-class="active-link"
                             aria-current="page"
                             >
-                            users/pages/Overview.vue
+                            Login
                         </router-link>
                     </li>
 
-                    <!-- <li class="nav-item">
-                        <router-link
-                            :to="{name: 'books.create'}"
+                    <li v-if="isLoggedIn" class="nav-item">
+                        <a  
                             class="nav-link active router-link-exact-active"
                             active-class="active-link"
                             aria-current="page"
                             >
-                            Add book
-                        </router-link>
-                    </li> -->
-
-                    <!-- <li class="nav-item">
-                        <router-link
-                            :to="{name: 'authors.create'}"
-                            class="nav-link active router-link-exact-active"
-                            active-class="active-link"
-                            aria-current="page"
-                            >
-                            Add author
-                        </router-link>
-                    </li> -->
+                            <button @click="logout" class="logout">Logout</button>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

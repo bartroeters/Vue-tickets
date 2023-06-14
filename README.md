@@ -67,4 +67,31 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## TODO
 
-Order tickets chronologically.
+1
+registerBeforeRouteMiddleware(({meta}) => {
+    if (!isLoggedIn.value && meta?.auth) {
+        goToLoginPage();
+        return true;
+    }
+    if (isLoggedIn.value && !meta?.canSeeWhenLoggedIn) {
+        goToOverviewPage(TICKET_DOMAIN_NAME);
+        return true;
+    }
+    return false;
+});
+
+2
+Question: wat is de functie van me()? Waarom staan resource controllers in Manos onder de auth middleware?
+
+3
+import { useUser } from '@vueuse/core';
+
+const props = defineProps({
+  tickets: { type: Array as PropType<Ticket[]> },
+  categories: { type: Array as PropType<Category[]> }
+});
+
+const { value: loggedInUser } = useUser();
+console.log(loggedInUser);
+
+// const loggedInUserTickets = computed(() => props.tickets.filter(ticket => ticket.userId === loggedInUser.value.id));

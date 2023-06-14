@@ -22,7 +22,9 @@ class StoreResponseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'userId' => [],
+            'ticketId' => [],
+            'content' => []
         ];
     }
 }

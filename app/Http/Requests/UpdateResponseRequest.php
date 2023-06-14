@@ -11,7 +11,7 @@ class UpdateResponseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateResponseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'userId' => [],
+            'ticketId' => [],
+            'content' => []
         ];
     }
 }

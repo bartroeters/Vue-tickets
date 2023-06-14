@@ -26,9 +26,11 @@ class LoggedInUserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'firstName' => $this->firstName,
-            'lastName' => $this->lastName,
+            'firstName' => $this->first_name,
+            'lastName' => $this->last_name,
             'email' => $this->email,
+            'isAdmin' => $this->is_admin,
+            'phonenumber' => $this->phonenumber
         ];
     }
 }

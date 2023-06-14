@@ -22,7 +22,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //
+        // Show the form view for creating a new status
     }
 
     /**
@@ -30,7 +30,8 @@ class StatusController extends Controller
      */
     public function store(StoreStatusRequest $request)
     {
-        //
+        $status = Status::create($request->validated());
+        return new StatusResource($status);
     }
 
     /**
@@ -38,7 +39,7 @@ class StatusController extends Controller
      */
     public function show(Status $status)
     {
-        //
+        // Show the resource details view for the specified status
     }
 
     /**
@@ -46,7 +47,7 @@ class StatusController extends Controller
      */
     public function edit(Status $status)
     {
-        //
+        // Show the form view for editing the specified status
     }
 
     /**
@@ -54,7 +55,8 @@ class StatusController extends Controller
      */
     public function update(UpdateStatusRequest $request, Status $status)
     {
-        //
+        $status->update($request->validated());
+        return new StatusResource($status);
     }
 
     /**
@@ -62,6 +64,6 @@ class StatusController extends Controller
      */
     public function destroy(Status $status)
     {
-        //
+        $status->delete();
     }
 }

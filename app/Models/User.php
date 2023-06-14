@@ -22,11 +22,11 @@ class User extends BaseModel implements JWTSubject, AuthenticatableContract, Aut
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'firstName',
+        'lastName',
         'email',
         'password',
-        'is_admin',
+        'isAdmin',
         'phonenumber'
     ];
 

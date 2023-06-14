@@ -1,4 +1,3 @@
-import Ticket from './types';
 import { storeModuleFactory } from 'services/store';
 import { createOverviewRoute, createCreateRoute, createEditRoute, createShowRoute } from 'services/router/factory';
 import OverviewVue from './pages/Overview.vue';
@@ -10,6 +9,7 @@ import { userStore } from 'domains/users';
 import { statusStore } from 'domains/statuses';
 import { responseStore } from 'domains/responses';
 import { Response as ResponseType } from 'domains/responses/types';
+import Ticket from './types';
 
 export const TICKET_DOMAIN_NAME = 'tickets';
 

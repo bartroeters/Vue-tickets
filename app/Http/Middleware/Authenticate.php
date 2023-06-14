@@ -32,11 +32,11 @@ class Authenticate extends BaseMiddleware
         try {
             $this->auth->parseToken()->authenticate();
         } catch (Exception $e) {
-            $status = 'Authorization Token niet gevonden';
+            $status = 'Authorization Token not found';
             if ($e instanceof TokenInvalidException) {
-                $status = 'Authorization Token is niet geldig';
+                $status = 'Authorization Token is not valid';
             } elseif ($e instanceof TokenExpiredException) {
-                $status = 'Authorization Token is verlopen';
+                $status = 'Authorization Token has expired';
             }
             // Do not throw here as those errors will show up in slack and we know why they happen
             return response()->json(['message' => $status], Response::HTTP_UNAUTHORIZED);

@@ -22,7 +22,7 @@ class ResponseController extends Controller
      */
     public function create()
     {
-        //
+        // Show the form view for creating a new response
     }
 
     /**
@@ -30,7 +30,8 @@ class ResponseController extends Controller
      */
     public function store(StoreResponseRequest $request)
     {
-        //
+        $response = Response::create($request->validated());
+        return new ResponseResource($response);
     }
 
     /**
@@ -38,7 +39,7 @@ class ResponseController extends Controller
      */
     public function show(Response $response)
     {
-        //
+        // Show the resource details view for the specified response
     }
 
     /**
@@ -46,7 +47,7 @@ class ResponseController extends Controller
      */
     public function edit(Response $response)
     {
-        //
+        // Show the form view for editing the specified response
     }
 
     /**
@@ -54,7 +55,8 @@ class ResponseController extends Controller
      */
     public function update(UpdateResponseRequest $request, Response $response)
     {
-        //
+        $response->update($request->validated());
+        return new ResponseResource($response);
     }
 
     /**
@@ -62,6 +64,7 @@ class ResponseController extends Controller
      */
     public function destroy(Response $response)
     {
-        //
+        $response->delete();
+        return response()->json(['message' => 'Response deleted successfully']);
     }
 }

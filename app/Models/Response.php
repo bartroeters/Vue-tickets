@@ -9,8 +9,8 @@ class Response extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'ticket_id',
+        'userId',
+        'ticketId',
         'content'
     ];
 

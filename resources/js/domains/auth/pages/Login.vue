@@ -13,13 +13,12 @@ const submit = async () => {
 </script>
 
 <template>
-    <h1>Manos</h1>
+    <h1>Login</h1>
     <form @submit.prevent="submit">
         <div class="mb-2">
             <input
                 v-model="credentials.email"
                 type="email"
-                class="form-control"
                 name="email"
                 placeholder="Emailadress"
             />
@@ -28,7 +27,6 @@ const submit = async () => {
             <input
                 v-model="credentials.password"
                 type="password"
-                class="form-control"
                 name="password"
                 placeholder="Password"
             />

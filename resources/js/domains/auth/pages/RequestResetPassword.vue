@@ -1,4 +1,4 @@
-<!-- <script setup lang="ts">
+<script setup>
 import {goToLoginPage} from '..';
 import {postRequest} from 'services/http';
 import {ref} from 'vue';
@@ -9,14 +9,14 @@ const email = ref('');
 
 const sendEmailResetPassword = async () => {
     await postRequest('send-email-reset-password', {email: email.value});
-    successToast('Email sent with a link to reset your password.');
+    successToast('Email sent with a link to reset the password');
     goToLoginPage();
 };
 </script>
 
 <template>
     <form @submit.prevent="RequestResetPassword">
-        <h1>Forgot Password</h1>
+        <h1>Forgot passowrd</h1>
         <p>Please enter your email address below. You will receive instructions to reset your password.</p>
 
         <div class="mb-2">
@@ -26,7 +26,7 @@ const sendEmailResetPassword = async () => {
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <button class="m-1 btn btn-primary" @click="sendEmailResetPassword">Send</button>
-            <router-link class="" :to="{name: 'Login'}">Terug</router-link>
+            <router-link class="" :to="{name: 'Login'}">Go back</router-link>
         </div>
     </form>
-</template> -->
+</template>

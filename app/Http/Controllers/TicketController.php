@@ -30,7 +30,10 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        //
+        $ticket = Ticket::create($request->validated());
+        $ticket->categories()->sync($request->input('categoryIds'));
+
+        return new TicketResource($ticket);
     }
 
     /**
@@ -54,7 +57,8 @@ class TicketController extends Controller
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        //
+        $ticket->update($request->validated());
+        return new TicketResource($ticket);
     }
 
     /**
@@ -62,6 +66,6 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        //
+        $ticket->delete();
     }
 }

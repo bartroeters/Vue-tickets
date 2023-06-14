@@ -1,11 +1,10 @@
-<!-- <script setup lang="ts">
+<script setup lang="ts">
 import { TICKET_DOMAIN_NAME } from 'domains/tickets';
-// import { User } from 'domains/users/types';
 import { getCurrentRouteToken, goToOverviewPage } from 'services/router';
 import { getRequest, postRequest } from 'services/http';
 import { login } from '..';
 import { ref } from 'vue';
-import User from '../../users/types';
+import User from 'domains/users/types';
 
 const newCredentials = ref({ password: '', repeatedPassword: '', phonenumber: '' });
 
@@ -14,9 +13,10 @@ const userToRegister = ref<User>({
   firstName: '',
   lastName: '',
   email: '',
-  inviteToken: '',
+  password: '',
   isAdmin: false,
-  phonenumber: NaN
+  phonenumber: 0,
+  inviteToken: ''
 });
 
 const getUserToRegister = async (token: string) => {
@@ -63,7 +63,7 @@ getUserToRegister(getCurrentRouteToken());
             />
         </div>
         <div class="pt-3">
-            <button>Registrer</button>
+            <button>Register</button>
         </div>
     </form>
-</template> -->
+</template>

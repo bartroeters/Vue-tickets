@@ -16,7 +16,11 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'firstName' => [],
+            'lastName' => [],
+            'email' => [],
+            'isAdmin' => [],
+            'phonenumber' => []
         ];
     }
 }
