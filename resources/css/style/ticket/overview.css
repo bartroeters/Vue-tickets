@@ -52,3 +52,28 @@
 .date {
     margin-left: auto;
 }
+
+.toggle-tickets-button {
+    margin-right: 10px;
+    background-color: #fff;
+    border: 1px solid #333;
+    padding: 4px 12px;
+    font-size: 13.1px;
+    letter-spacing: .5px;
+    border-radius: 5%;
+    cursor: pointer;
+}
+
+    .toggle-tickets-button * {
+    color: #333;
+    text-decoration: none;
+}
+
+    .toggle-tickets-button:hover {
+    background-color: #888;
+    color: #fff;
+}
+
+    .toggle-tickets-button:hover * {
+    color: #fff;
+}

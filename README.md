@@ -68,6 +68,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## TODO
 
 1
+Wat is de functie van onderstaande? Op het moment werkt het niet goed.
 registerBeforeRouteMiddleware(({meta}) => {
     if (!isLoggedIn.value && meta?.auth) {
         goToLoginPage();
@@ -81,17 +82,17 @@ registerBeforeRouteMiddleware(({meta}) => {
 });
 
 2
-Question: wat is de functie van me()? Waarom staan resource controllers in Manos onder de auth middleware?
+Waarom staan resource controllers in Manos onder de auth middleware?
 
 3
-import { useUser } from '@vueuse/core';
-
-const props = defineProps({
-  tickets: { type: Array as PropType<Ticket[]> },
-  categories: { type: Array as PropType<Category[]> }
+Is er een betere manier om onderstaande te benaderen (bijv zonder gebruik van watch)
+watch(isLoggedIn, (loggedIn) => {
+  if (!loggedIn) {
+    data.showAllTickets = true;
+  }
 });
 
-const { value: loggedInUser } = useUser();
-console.log(loggedInUser);
-
-// const loggedInUserTickets = computed(() => props.tickets.filter(ticket => ticket.userId === loggedInUser.value.id));
+4
+ik kan `v-if="isLoggedIn"` gebruiken om elementen te verbergen, maar als ik de URL intik kan ik als ik niet ingelogd ben nog steeds het create formulier bereiken.
+5
+ik kan `v-if="isLoggedIn && ticket.userId === getLoggedInUser.id"` gebruiken om de edit button te verberegn voor tickets die niet van mezelf zijn, maar ik maar als ik de URL intik kan ik als ik niet ingelogd ben nog steeds het edit formulier bereiken

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'failover'),
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return [
     | sending an e-mail. You will specify which one you are using for your
     | mailers below. You are free to add additional mailers as required.
     |
-    | Supported: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
+    | Supported: "smtp", "sendmail", "mailgun", "ses",
     |            "postmark", "log", "array", "failover"
     |
     */
@@ -36,7 +36,6 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'url' => env('MAIL_URL'),
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
@@ -52,16 +51,11 @@ return [
 
         'mailgun' => [
             'transport' => 'mailgun',
-            // 'client' => [
-            //     'timeout' => 5,
-            // ],
         ],
 
         'postmark' => [
             'transport' => 'postmark',
-            // 'client' => [
-            //     'timeout' => 5,
-            // ],
+            'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
         ],
 
         'sendmail' => [
@@ -81,10 +75,13 @@ return [
         'failover' => [
             'transport' => 'failover',
             'mailers' => [
-                'smtp',
-                'log',
+                'mailgun',
+                'postmark',
+                'sendmail',
             ],
         ],
+
+        'from' => ['address' => 'bart.roeters@gmail.com', 'name' => 'Bart Roeters'],
     ],
 
     /*
