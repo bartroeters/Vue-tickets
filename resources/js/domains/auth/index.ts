@@ -6,7 +6,7 @@ import { getRequest, postRequest } from 'services/http';
 import { goToOverviewPage, goToRoute, registerBeforeRouteMiddleware } from 'services/router';
 import Login from './pages/Login.vue';
 import Register from './pages/Register.vue';
-import RequestResetPassword from './pages/RequestResetPassword.vue';
+import RecoverPassword from './pages/RecoverPassword.vue';
 import ResetPassword from './pages/ResetPassword.vue';
 
 export const authRoutes = [
@@ -25,7 +25,7 @@ export const authRoutes = [
     {
         path: '/forgot-password',
         name: 'forgotPassword',
-        component: RequestResetPassword,
+        component: RecoverPassword,
         meta: {auth: false, canSeeWhenLoggedIn: false},
     },
     {
@@ -65,14 +65,14 @@ export const checkIfLoggedIn = async () => {
 
 export const goToLoginPage = () => goToRoute('Login', undefined);
 
-// registerBeforeRouteMiddleware(({meta}) => {
-//     if (!isLoggedIn.value && meta?.auth) {
-//         goToLoginPage();
-//         return true;
-//     }
-//     if (isLoggedIn.value && !meta?.canSeeWhenLoggedIn) {
-//         goToOverviewPage(TICKET_DOMAIN_NAME);
-//         return true;
-//     }
-//     return false;
-// });
+registerBeforeRouteMiddleware(({meta}) => {
+    if (!isLoggedIn.value && meta?.auth) {
+        goToLoginPage();
+        return true;
+    }
+    if (isLoggedIn.value && !meta?.canSeeWhenLoggedIn) {
+        goToOverviewPage(TICKET_DOMAIN_NAME);
+        return true;
+    }
+    return false;
+});

@@ -96,3 +96,6 @@ watch(isLoggedIn, (loggedIn) => {
 ik kan `v-if="isLoggedIn"` gebruiken om elementen te verbergen, maar als ik de URL intik kan ik als ik niet ingelogd ben nog steeds het create formulier bereiken.
 5
 ik kan `v-if="isLoggedIn && ticket.userId === getLoggedInUser.id"` gebruiken om de edit button te verberegn voor tickets die niet van mezelf zijn, maar ik maar als ik de URL intik kan ik als ik niet ingelogd ben nog steeds het edit formulier bereiken
+
+6
+Ik kan mails versturen voor het herstellen van het wachtwoord van een gebruiker met bijbehorende link naar de reset password page, maar de link die wordt meegestuurd werkt niet.

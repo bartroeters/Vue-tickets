@@ -80,6 +80,11 @@ class User extends BaseModel implements JWTSubject, AuthenticatableContract, Aut
         return trim($this->firstName." ".$this->LastName);
     }
 
+    public static function retrieveByEmail(string $email): ?User
+    {
+        return self::where('email', $email)->first();
+    }
+
     public function createdTickets()
     {
         return $this->hasMany(Ticket::class);

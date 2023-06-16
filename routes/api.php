@@ -20,8 +20,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('login', [AuthController::class, 'login']);
-Route::post('send-email-reset-password', [AuthController::class, 'resetPasswordRequest']);
-Route::post('reset-password', [AuthController::class, 'updatePassword']);
+Route::post('recover-password', [AuthController::class, 'RecoverPasswordRequest']);
+// Route::post('reset-password', [AuthController::class, 'updatePassword']);
+Route::post('reset-password', [AuthController::class, 'updatePassword'])->name('resetPassword');
 Route::get('get-user-to-register/{user:invite_token}', [AuthController::class, 'userToRegister']);
 Route::post('register/{user:invite_token}', [AuthController::class, 'register']);
 

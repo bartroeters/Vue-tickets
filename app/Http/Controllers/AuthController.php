@@ -6,17 +6,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\RecoverPasswordRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\ValidatePasswordRequest;
 use App\Http\Resources\LoggedInUserResource;
 use App\Http\Resources\UserOverview;
 use App\Http\Responses\NoContentResponse;
+use App\Mail\ResetPasswordMail;
 use App\Models\PasswordReset;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use PHPOpenSourceSaver\JWTAuth\JWTGuard;
 
@@ -125,28 +127,30 @@ class AuthController extends Controller
         /**
          * Send a reset password mail to user
          *
-         * @param ResetPasswordRequest $request
+         * @param RecoverPasswordRequest $request
          *
          * @return NoContentResponse
          */
-    public function resetPasswordRequest(ResetPasswordRequest $request): NoContentResponse
+    public function RecoverPasswordRequest(RecoverPasswordRequest $request): NoContentResponse
     {
         $validated = $request->validated();
 
         if (!User::where('email', $validated['email'])->exists()) {
             return new NoContentResponse;
         }
-        $user = User::retrieveByEmail($validated['email']);
 
+        $user = User::retrieveByEmail($validated['email']);
         $token = (new PasswordReset)->create($user);
-        $user->sendPasswordResetNotification($token);
+    
+        Mail::to($user->email)->send(new ResetPasswordMail($token, $user));
+    
         return new NoContentResponse;
     }
 
     /**
      * Send reset password
      *
-     * @param ResetPasswordRequest $request
+     * @param RecoverPasswordRequest $request
      *
      * @return NoContentResponse
      */
@@ -157,10 +161,13 @@ class AuthController extends Controller
         if (!User::where('email', $validated['email'])->exists()) {
             return new NoContentResponse;
         }
+
         $user = User::retrieveByEmail($validated['email']);
+
         $user->forceFill([
             'password' => bcrypt($validated['password']),
         ])->setRememberToken(Str::random(60));
+        
         $user->save();
 
         PasswordReset::where('email', $user->email)->delete();

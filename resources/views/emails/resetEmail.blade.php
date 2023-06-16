@@ -1,17 +1,17 @@
 @component('mail::message')
-<h1>Hallo {{$name}}</h1>
+<h1>Hello {{$name}}</h1>
 
-Je ontvangt deze e-mail omdat we een wachtwoordherstel verzoek hebben ontvangen voor je account.
+You are receiving this email because we have received a password reset request for your account.
 
-@component('mail::button',  ['url' => $url])
-Wachtwoord herstellen
+@component('mail::button',  ['url' => $resetUrl])
+Recover password
 @endcomponent
 
-Deze link om je wachtwoord te herstellen verloopt over 60 minuten.
+This link to reset your password will expire in 60 minutes.
 
-Als je geen wachtwoordherstel hebt aangevraagd, hoef je verder niets te doen.
+If you didn't request a password reset, you don't need to do anything else.
 <p>
-Met vriendelijke groet, <br/>
+Yours sincerely, <br/>
 {{ config('app.name') }}
 </p>
 @endcomponent

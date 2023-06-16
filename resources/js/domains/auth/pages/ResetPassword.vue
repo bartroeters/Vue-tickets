@@ -1,51 +1,62 @@
 <script setup>
-import {goToLoginPage} from '..';
-import {postRequest} from 'services/http';
-import {reactive} from 'vue';
-import {successToast} from 'services/toast';
-import {useRoute} from 'vue-router';
+import { goToLoginPage } from '..';
+import { postRequest } from 'services/http';
+import { reactive, ref } from 'vue';
+import { successToast } from 'services/toast';
+import { useRoute } from 'vue-router';
 import BaseFormError from 'components/FormError.vue';
 
-const {email, token} = useRoute().params;
+const { email, token } = useRoute().params;
 
-const credentials = reactive({token, email});
+const credentials = reactive({ token, email });
+
 const resetPassword = async () => {
-    await postRequest('reset-password', credentials);
-    successToast('Je wachtwoord is succesvol aangepast. Login om verder te gaan.');
-    goToLoginPage();
+  await postRequest('reset-password', credentials);
+  successToast('Your password has been successfully changed. Log in to proceed.');
+  goToLoginPage();
 };
+
+const resetUrl = ref('');
+
+resetUrl.value = '{{ $resetUrl }}';
 </script>
 
 <template>
-    <form @submit.prevent="ResetPassword">
-        <h1>Nieuw wachtwoord</h1>
-        <input type="hidden" name="e-mail" :value="email" />
-        <div class="mb-2">
-            <label for="password">Wachtwoord</label>
-            <input
-                v-model="credentials.password"
-                placeholder="Nieuw wachtwoord"
-                type="password"
-                class="form-control"
-                autocomplete="new-password"
-            />
-            <BaseFormError name="password" />
-        </div>
+  <form @submit.prevent="resetPassword">
+    <h1>New password</h1>
 
-        <div class="mb-2">
-            <label for="email">Herhaal Wachtwoord</label>
-            <input
-                v-model="credentials.password_confirmation"
-                placeholder="Herhaal nieuw wachtwoord"
-                class="form-control"
-                type="password"
-                autocomplete="new-password"
-            />
-            <BaseFormError name="token" />
-        </div>
-        <div class="d-flex justify-content-between align-items-center">
-            <button class="btn btn-primary m-1" @click="resetPassword">Reset password</button>
-            <router-link class="" :to="{name: 'Login'}">Inloggen</router-link>
-        </div>
-    </form>
+    <input type="hidden" name="e-mail" :value="email" />
+
+    <div class="mb-2">
+      <label for="password">Password</label>
+
+      <input
+        v-model="credentials.password"
+        placeholder="New password"
+        type="password"
+        autocomplete="new-password"
+      />
+
+      <BaseFormError name="password" />
+    </div>
+
+    <div class="mb-2">
+      <label for="password_confirmation">Repeat password</label>
+
+      <input
+        v-model="credentials.password_confirmation"
+        placeholder="Repeat password"
+        type="password"
+        autocomplete="new-password"
+      />
+
+      <BaseFormError name="password_confirmation" />
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <button class="btn btn-primary m-1" @click="resetPassword">Reset password</button>
+      
+      <router-link :to="{ name: 'Login' }">Login</router-link>
+    </div>
+  </form>
 </template>

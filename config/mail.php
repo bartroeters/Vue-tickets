@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
+            'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
+            'port' => env('MAIL_PORT', 2525),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'username' => env('MAIL_USERNAME', '631d5228dfc4ac'),
+            'password' => env('MAIL_PASSWORD', 'b430a638f0d9b5'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
@@ -75,13 +75,17 @@ return [
         'failover' => [
             'transport' => 'failover',
             'mailers' => [
+                'smtp',
                 'mailgun',
                 'postmark',
                 'sendmail',
             ],
         ],
 
-        'from' => ['address' => 'bart.roeters@gmail.com', 'name' => 'Bart Roeters'],
+        'from' => [
+            'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+            'name' => env('MAIL_FROM_NAME', 'Example'),
+        ],
     ],
 
     /*

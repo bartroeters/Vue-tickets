@@ -6,7 +6,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\BaseFormRequest;
 
-class ResetPasswordRequest extends BaseFormRequest
+class RecoverPasswordRequest extends BaseFormRequest
 {
     /**
      * Get the validation rules that apply to the request.

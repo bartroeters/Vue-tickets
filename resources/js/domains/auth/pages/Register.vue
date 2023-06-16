@@ -39,29 +39,34 @@ getUserToRegister(getCurrentRouteToken());
     <form @submit.prevent="submit">
         <div class="mb-2">
             <label for="email">First name:</label>
-            <input v-model="userToRegister.firstName" type="text" class="form-control" name="firstName" disabled />
+            <input v-model="userToRegister.firstName" type="text" name="firstName" disabled />
         </div>
+
         <div class="mb-2">
             <label for="email">Last name:</label>
-            <input v-model="userToRegister.lastName" type="text" class="form-control" name="lastName" disabled />
+            <input v-model="userToRegister.lastName" type="text" name="lastName" disabled />
         </div>
+
         <div class="mb-2">
             <label for="email">Email:</label>
-            <input v-model="userToRegister.email" type="text" class="form-control" name="email" disabled />
+            <input v-model="userToRegister.email" type="text" name="email" disabled />
         </div>
+
         <div class="mb-2">
             <label for="email">Password:</label>
-            <input v-model="newCredentials.password" type="password" class="form-control" name="password" />
+            <input v-model="newCredentials.password" type="password" name="password" />
         </div>
+
         <div class="mb-2">
             <label for="password">Repeat password:</label>
             <input
                 v-model="newCredentials.repeatedPassword"
                 type="password"
-                class="form-control"
+            
                 name="repeatedPassword"
             />
         </div>
+        
         <div class="pt-3">
             <button>Register</button>
         </div>
