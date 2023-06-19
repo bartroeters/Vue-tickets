@@ -20,15 +20,15 @@ const sendEmailRecoverPassword = async () => {
         
         <p>Please enter your email address below. You will receive instructions to reset your password.</p>
 
-        <div class="mb-2">
+        <div>
             <label for="email">Email</label>
             <input v-model="email" type="email" name="email" placeholder="e-mailadres" />
             <BaseFormError name="email" />
         </div>
 
-        <div class="d-flex justify-content-between align-items-center">
-            <button class="m-1 btn btn-primary" @click="sendEmailRecoverPassword">Send</button>
-            <router-link class="" :to="{name: 'Login'}">Go back</router-link>
+        <div>
+            <button @click="sendEmailRecoverPassword">Send</button>
+            <router-link :to="{name: 'Login'}">Go back</router-link>
         </div>
     </form>
 </template>
