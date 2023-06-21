@@ -6,7 +6,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\BaseFormRequest;
 
-class RecoverPasswordRequest extends BaseFormRequest
+class ResetPasswordRequest extends BaseFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -28,8 +28,8 @@ class RecoverPasswordRequest extends BaseFormRequest
     public function messages()
     {
         return [
-            'email.required' => 'Vul een e-mailadres in',
-            'email' => 'Vul een correct e-mailadres in',
+            'email.required' => 'Enter an email adress',
+            'email' => 'Enter a correct email adress',
         ];
     }
 }

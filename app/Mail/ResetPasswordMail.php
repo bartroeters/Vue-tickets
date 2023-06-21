@@ -36,7 +36,7 @@ class ResetPasswordMail extends Mailable
     {
         return new Envelope(
             to: [new Address($this->user->email, $this->user->name)],
-            subject: 'Password recovery notification',
+            subject: 'Password reset notification',
         );
     }
 
@@ -47,10 +47,10 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
 {
-    $resetUrl = 'http://localhost:8080/reset-password?token='.$this->url.'&email='.$this->user->email;
+    $resetUrl = 'http://localhost:8000/reset-password/'.$this->url.'/'.$this->user->email;
 
     return $this->markdown('emails.resetEmail')
-        ->subject('Password recovery notification')
+        ->subject('Password reset notification')
         ->with([
             'name' => $this->user->name,
             'resetUrl' => $resetUrl,

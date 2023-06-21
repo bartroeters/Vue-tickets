@@ -15,6 +15,7 @@ import { isLoggedIn, logout } from '../domains/auth';
             </div>
 
             <button
+                v-if="isLoggedIn"
                 class="navbar-toggler"
                 type="button"
                 data-bs-toggle="collapse"
@@ -28,7 +29,10 @@ import { isLoggedIn, logout } from '../domains/auth';
                 </span>
             </button>
 
-            <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
+            <div
+                v-if="isLoggedIn"
+                class="collapse navbar-collapse menu"
+                id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <router-link

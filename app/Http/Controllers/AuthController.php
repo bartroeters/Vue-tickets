@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RecoverPasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\ValidatePasswordRequest;
 use App\Http\Resources\LoggedInUserResource;
@@ -127,11 +127,11 @@ class AuthController extends Controller
         /**
          * Send a reset password mail to user
          *
-         * @param RecoverPasswordRequest $request
+         * @param ResetPasswordRequest $request
          *
          * @return NoContentResponse
          */
-    public function RecoverPasswordRequest(RecoverPasswordRequest $request): NoContentResponse
+    public function ResetPasswordRequest(ResetPasswordRequest $request): NoContentResponse
     {
         $validated = $request->validated();
 
@@ -150,7 +150,7 @@ class AuthController extends Controller
     /**
      * Send reset password
      *
-     * @param RecoverPasswordRequest $request
+     * @param ResetPasswordRequest $request
      *
      * @return NoContentResponse
      */

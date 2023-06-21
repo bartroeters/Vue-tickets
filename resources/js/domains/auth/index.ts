@@ -6,18 +6,18 @@ import { getRequest, postRequest } from 'services/http';
 import { goToOverviewPage, goToRoute, registerBeforeRouteMiddleware } from 'services/router';
 import Login from './pages/Login.vue';
 import Register from './pages/Register.vue';
-import RecoverPassword from './pages/RecoverPassword.vue';
+import RequestResetPassword from './pages/RequestResetPassword.vue';
 import ResetPassword from './pages/ResetPassword.vue';
 
 export const authRoutes = [
     {
-        path: '/login',
+        path: '/',
         name: 'Login',
         component: Login,
         meta: {auth: false, canSeeWhenLoggedIn: false},
     },
     {
-        path: '/forgot-password/:token/:email',
+        path: '/reset-password/:token/:email',
         name: 'resetPassword',
         component: ResetPassword,
         meta: {auth: false, canSeeWhenLoggedIn: false},
@@ -25,11 +25,11 @@ export const authRoutes = [
     {
         path: '/forgot-password',
         name: 'forgotPassword',
-        component: RecoverPassword,
+        component: RequestResetPassword,
         meta: {auth: false, canSeeWhenLoggedIn: false},
     },
     {
-        path: '/registrer/:token',
+        path: '/registreren/:token',
         name: 'register',
         component: Register,
         meta: {auth: false, canSeeWhenLoggedIn: false},
@@ -50,6 +50,7 @@ export const login = async (credentials: Credentials) => {
 export const logout = async () => {
     await getRequest('logout');
     loggedInUser.value = null;
+    goToLoginPage();
 };
 
 export const me = async () => {

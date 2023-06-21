@@ -1,42 +1,38 @@
 <script setup lang="ts">
-import { PropType, reactive, ref, watch } from 'vue';
+import { PropType, reactive } from 'vue';
 import Ticket from '../types';
 import { showAllContent, toggleContent, getFormattedContent } from 'shared-components/get-formatted-content';
 import Category from 'domains/categories/types';
-import { getCategoryTitle, getUserFullName, getStatusTitle } from '..';
+import { getCategoryTitle, getUserFullName, getStatusTitle, getLoggedInUserTicketCount, ticketStore } from '..';
 import { userStore } from 'domains/users';
 import { statusStore } from 'domains/statuses';
 import { getLoggedInUser, isLoggedIn } from 'domains/auth';
+import DesignateAssigneeForm from './DesignateAssigneeForm.vue';
 
 const props = defineProps({
   tickets: { type: Array as PropType<Ticket[]> },
   categories: { type: Array as PropType<Category[]> }
 });
 
-userStore.actions.getAll();
+const users = userStore.actions.getAll();
 statusStore.actions.getAll();
 
 const data = reactive({
-  showAllTickets: true,
-  loggedInUser: null
+  showAllTickets: false
 });
 
 const toggleTicketsView = () => {
   data.showAllTickets = !data.showAllTickets;
 };
-
-watch(isLoggedIn, (loggedIn) => {
-  if (!loggedIn) {
-    data.showAllTickets = true;
-  }
-});
 </script>
 
 <template>
   <div class="header-wrapper">
-    <h2>All tickets ({{ tickets.length }})</h2>
+    <h2>
+      {{ data.showAllTickets ? `All tickets (${tickets.length})` : `Viewing my Tickets (${getLoggedInUserTicketCount()})` }}
+    </h2>
 
-    <div v-if="isLoggedIn">
+    <div>
       <button class="toggle-tickets-button" @click="toggleTicketsView">
         {{ data.showAllTickets ? 'View My Tickets' : 'View All Tickets' }}
       </button>
@@ -63,7 +59,7 @@ watch(isLoggedIn, (loggedIn) => {
 
       <tbody>
         <template v-for="ticket in props.tickets" :key="ticket.id">
-            <template v-if="data.showAllTickets || (isLoggedIn && ticket.userId === getLoggedInUser.id)">
+          <template v-if="data.showAllTickets || (isLoggedIn && ticket.userId === getLoggedInUser.id)">
             <tr>
               <td class="small-width">{{ ticket.id }}</td>
 
@@ -112,6 +108,11 @@ watch(isLoggedIn, (loggedIn) => {
                   <button v-if="ticket.content.length" @click="toggleContent(ticket.id)" class="toggle-content-button">
                     {{ showAllContent[ticket.id] ? '&uarr; Show less' : 'Show more &darr;' }}
                   </button>
+
+                  <designate-assignee-form
+                    v-if="ticket.assigneeId === null && !(ticket.userId === getLoggedInUser.id) && getLoggedInUser.isAdmin"
+                    :ticket="ticket"
+                  />
                   
                   <span>
                     <button class="link-to-show-page">

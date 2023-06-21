@@ -66,36 +66,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## TODO
-
-1
-Wat is de functie van onderstaande? Op het moment werkt het niet goed.
-registerBeforeRouteMiddleware(({meta}) => {
-    if (!isLoggedIn.value && meta?.auth) {
-        goToLoginPage();
-        return true;
-    }
-    if (isLoggedIn.value && !meta?.canSeeWhenLoggedIn) {
-        goToOverviewPage(TICKET_DOMAIN_NAME);
-        return true;
-    }
-    return false;
-});
-
-2
-Waarom staan resource controllers in Manos onder de auth middleware?
-
-3
-Is er een betere manier om onderstaande te benaderen (bijv zonder gebruik van watch)
-watch(isLoggedIn, (loggedIn) => {
-  if (!loggedIn) {
-    data.showAllTickets = true;
-  }
-});
-
-4
-ik kan `v-if="isLoggedIn"` gebruiken om elementen te verbergen, maar als ik de URL intik kan ik als ik niet ingelogd ben nog steeds het create formulier bereiken.
-5
-ik kan `v-if="isLoggedIn && ticket.userId === getLoggedInUser.id"` gebruiken om de edit button te verberegn voor tickets die niet van mezelf zijn, maar ik maar als ik de URL intik kan ik als ik niet ingelogd ben nog steeds het edit formulier bereiken
-
-6
-Ik kan mails versturen voor het herstellen van het wachtwoord van een gebruiker met bijbehorende link naar de reset password page, maar de link die wordt meegestuurd werkt niet.

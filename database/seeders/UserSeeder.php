@@ -13,7 +13,7 @@ class UserSeeder extends Seeder {
             'first_name' => 'Henk',
             'last_name' => 'Steen',
             'email' => 'henksteen@mail.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('bamischijf'),
             'is_admin' => true,
             'remember_token' => Str::random(10),
             'phonenumber' => '0612345678'

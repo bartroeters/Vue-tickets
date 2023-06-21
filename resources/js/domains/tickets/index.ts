@@ -10,6 +10,8 @@ import { statusStore } from 'domains/statuses';
 import { responseStore } from 'domains/responses';
 import { Response as ResponseType } from 'domains/responses/types';
 import Ticket from './types';
+import { loggedInUser } from '../auth';
+import User from '../users/types';
 
 export const TICKET_DOMAIN_NAME = 'tickets';
 
@@ -39,6 +41,10 @@ export const getUserFullName = (userId: number) => {
     const lastName = userStore.getters.byId(userId).value?.lastName;
     return `${firstName} ${lastName}`;
 };
+
+export const getAdminFullName = (userId: number) => {
+
+  };
   
 export const getStatusTitle = (statusId: number) =>   {
     return statusStore.getters.byId(statusId).value?.title;
@@ -48,4 +54,16 @@ export const getResponseValue = (ticketId: number): ResponseType[] => {
     const responses = responseStore.getters.all.value;
     return responses.filter((response: ResponseType) => response.ticketId === ticketId)
                     .map((response: ResponseType) => Object.freeze(response));
+};
+
+export const getLoggedInUserTicketCount = () => {
+    let count = 0;
+  
+    ticketStore.getters.all.value.forEach((ticket: Ticket) => {
+      if (ticket.userId === loggedInUser.value.id) {
+        count++;
+      }
+    });
+  
+    return count;
 };

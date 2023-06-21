@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { categoryStore } from 'domains/categories';
 import { resizeTextarea } from 'components/form/resize-text-area';
 import { useRoute } from 'vue-router';
+import { getLoggedInUser } from '../../auth';
 
 const props = defineProps({
   ticket: { type: Object as () => Ticket }
@@ -18,9 +19,9 @@ const createTicket: boolean = useRoute().name === "tickets.create";
 
 const ticketData = ref({
   ...props.ticket,
-  userId: createTicket ? 1 : props.ticket?.userId,
-  assigneeId: null,
-  statusId: 1
+  userId: createTicket ? getLoggedInUser.value.id : props.ticket?.userId,
+  assigneeId: createTicket ? null : props.ticket.assigneeId,
+  statusId: createTicket ? 1 : props.ticket.statusId
 });
 </script>
 
