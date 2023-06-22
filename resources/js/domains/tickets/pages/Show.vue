@@ -19,7 +19,7 @@ responseStore.actions.getAll();
 
 <template>
   <header class="header-wrapper">
-    <h2>{{ ticket.title }}</h2>
+    <h2>{{ ticket?.title }}</h2>
 
     <button class="link-to-previous-page">
       <router-link :to="{ name: 'tickets.overview' }">
@@ -61,7 +61,9 @@ responseStore.actions.getAll();
       <p>{{ ticket.content }}</p>
     </div>
 
-    <h6 class="response-title">Response</h6>
+    <div>
+      <h6 class="response-title">Response</h6>
+    </div>
 
     <div v-if="getResponseValue(ticket.id).length > 0">
       <div v-for="(response, index) in getResponseValue(ticket.id)" :key="index">
@@ -86,7 +88,11 @@ responseStore.actions.getAll();
     </div>
 
     <div v-else>
-      <p class="italic-font">No response available.</p>
+      <p class="italic-font">No response yet.</p>
+      
+      <router-link :to="{name: 'responses.create'}" :ticket="ticket">
+        Add response
+      </router-link>
     </div>
   </main>
 </template>

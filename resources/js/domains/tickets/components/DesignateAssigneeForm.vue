@@ -15,7 +15,6 @@ const designateAssignee = async () => {
 };
 
 const users = userStore.getters.all.value.filter(user => user.isAdmin);
-userStore.actions.getAll();
 
 const ticketData = ref({
   ...props.ticket,
