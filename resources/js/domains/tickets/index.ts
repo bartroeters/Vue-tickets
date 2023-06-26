@@ -12,6 +12,7 @@ import { Response as ResponseType } from 'domains/responses/types';
 import Ticket from './types';
 import { loggedInUser } from '../auth';
 import User from '../users/types';
+import { formatDate } from '@vueuse/core';
 
 export const TICKET_DOMAIN_NAME = 'tickets';
 

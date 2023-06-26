@@ -4,22 +4,26 @@ import { Response as ResponseType } from '../types';
 import { ref } from 'vue';
 import { responseStore } from '..';
 import { goBack } from 'services/router';
-import Ticket from '../../tickets/types';
+import { getLoggedInUser } from 'domains/auth';
+import { useRoute } from 'vue-router'
 
-const response = ref<ResponseType>({ id: NaN, userId: NaN, ticketId: NaN, content: "", createdAt: "", updatedAt: "" });
+const route = useRoute();
+
+const response = ref<ResponseType>({
+    id: NaN,
+    userId: getLoggedInUser.value.id,
+    ticketId: Number.parseInt(route.params.ticketId as string),
+    content: "",
+    createdAt: "",
+    updatedAt: "" 
+});
 
 const addResponse = async (responseData: ResponseType) => {
-    console.log(responseData);
      await responseStore.actions.create(responseData);
      goBack();
 };
-
-const props = defineProps({
-    ticket: { type: Object as () => Ticket }
-});
-
 </script>
 
 <template>
-    <response-form :ticket="props.ticket" v-model="response" @submitResponse="addResponse" />
+    <response-form v-model="response" :response="response" @submitResponse="addResponse" />
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
+import { PropType, onMounted, ref } from 'vue';
 import { Response as ResponseType } from '../types';
 import Ticket from 'domains/tickets/types';
 import { getLoggedInUser } from '../../auth';
@@ -7,29 +7,22 @@ import { ticketStore } from '../../tickets';
 import { resizeTextarea } from 'components/form/resize-text-area';
 
 const props = defineProps({
-    response: { type: Object as PropType<ResponseType>},
-    ticket: { type: Object as PropType<Ticket>}
+    response: { type: Object as PropType<ResponseType>}
 });
-
-console.log(props.ticket.id);
 
 defineEmits(['submitResponse']);
 
-// const ticketId = props.ticket?.id;
+console.log(props.response?.userId);
 
 const responseData = ref({
     ...props.response,
-    userId: getLoggedInUser.value.id,
-    // ticketId: props.response?.ticketId,
-    // ticketId: props.ticket?.id
+    userId: getLoggedInUser.value.id
 });
 </script>
 
 <template>
     <div class="response-form-wrapper">
         <form @submit.prevent="$emit('submitResponse', responseData)">
-
-            <!-- <input type="hidden" name="ticketId" :value="responseData.ticketId"> -->
 
             <div>
                 <label for="description">Response:</label>

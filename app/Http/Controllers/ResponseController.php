@@ -6,6 +6,10 @@ use App\Models\Response;
 use App\Http\Requests\StoreResponseRequest;
 use App\Http\Requests\UpdateResponseRequest;
 use App\Http\Resources\ResponseResource;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ResponseNotifierMail;
+use App\Models\Ticket;
+use App\Models\User;
 
 class ResponseController extends Controller
 {
@@ -30,7 +34,16 @@ class ResponseController extends Controller
      */
     public function store(StoreResponseRequest $request)
     {
-        $response = Response::create($request->validated());
+        $validated = $request->validated();
+
+        $response = Response::create($validated);
+
+        $ticket = Ticket::findOrFail($validated['ticketId']);
+        
+        $user = User::findOrFail($ticket->user_id);
+
+        Mail::to($user->email)->send(new ResponseNotifierMail($user, $response));
+
         return new ResponseResource($response);
     }
 
