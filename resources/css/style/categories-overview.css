@@ -1,0 +1,62 @@
+.category-list {
+    margin-top: 40px;
+    width: 600px;
+    background-color: #202020;
+    padding: 16px;
+}
+
+.category-item {
+    margin-bottom: 12px;
+}
+
+.category-link {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+}
+
+.category-title {
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.category-ticket-count {
+    font-size: 14px;
+}
+
+/* Adjustments for different screen sizes */
+@media (max-width: 768px) {
+    .category-list {
+        padding: 12px;
+    }
+
+    .category-item {
+    margin-bottom: 10px;
+    }
+
+    .category-title {
+        font-size: 16px;
+    }
+
+    .category-ticket-count {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-list {
+        padding: 8px;
+    }
+
+    .category-item {
+        margin-bottom: 8px;
+    }
+
+    .category-title {
+        font-size: 14px;
+    }
+
+    .category-ticket-count {
+        font-size: 10px;
+    }
+}

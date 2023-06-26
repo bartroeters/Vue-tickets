@@ -42,10 +42,6 @@ export const getUserFullName = (userId: number) => {
     const lastName = userStore.getters.byId(userId).value?.lastName;
     return `${firstName} ${lastName}`;
 };
-
-export const getAdminFullName = (userId: number) => {
-
-  };
   
 export const getStatusTitle = (statusId: number) =>   {
     return statusStore.getters.byId(statusId).value?.title;
@@ -68,3 +64,18 @@ export const getLoggedInUserTicketCount = () => {
   
     return count;
 };
+
+export const updateStatus = async (ticketId: number, statusId: number) => {
+    const ticketData = ticketStore.getters.byId(ticketId).value;
+    if (ticketData) {
+        const updatedTicket = {
+            ...ticketData,
+            statusId: statusId
+        };
+        await ticketStore.actions.update(ticketId, updatedTicket);
+        return updatedTicket;
+    }
+    return null;
+};
+
+

@@ -45,18 +45,18 @@ import { isLoggedIn, logout } from '../domains/auth';
                         </router-link>
                     </li>
 
-                    <li v-if="!isLoggedIn" class="nav-item">
+                    <li class="nav-item">
                         <router-link
-                            :to="{name: 'Login'}"
+                            :to="{name: 'categories.overview'}"
                             class="nav-link active router-link-exact-active"
                             active-class="active-link"
                             aria-current="page"
                             >
-                            Login
+                            Categories
                         </router-link>
                     </li>
 
-                    <li v-if="isLoggedIn" class="nav-item">
+                    <li class="nav-item">
                         <a  
                             class="nav-link active router-link-exact-active"
                             active-class="active-link"

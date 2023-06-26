@@ -7,7 +7,7 @@ import { statusStore } from 'domains/statuses';
 import { responseStore } from 'domains/responses';
 import { getCategoryTitle, getUserFullName, getStatusTitle, getResponseValue } from '..';
 import { loggedInUser } from '../../auth';
-import { Response as ResponseType } from 'domains/responses/types';
+import { formatDate } from 'helpers/date-time-formatter';
 
 const ticketId = getCurrentRouteId();
 const ticket = ticketStore.getters.byId(ticketId);
@@ -17,29 +17,6 @@ userStore.actions.getAll();
 categoryStore.actions.getAll();
 statusStore.actions.getAll();
 responseStore.actions.getAll();
-
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  const formattedDate = date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric'
-  });
-  return formattedDate;
-};
-
-const formatDateDebug = (dateString: string) => {
-  console.log('Raw date:', dateString);
-  return dateString;
-};
-
-const responseValueDebug = (response: ResponseType) => {
-  console.log('Response:', response);
-  return response;
-};
 </script>
 
 <template>
@@ -86,14 +63,12 @@ const responseValueDebug = (response: ResponseType) => {
       <p>{{ ticket.content }}</p>
     </div>
 
-    <div>
-      <h6 class="response-title">Response</h6>
-    </div>
+    <h6 class="response-title">Response</h6>
 
     <div v-if="getResponseValue(ticket.id).length > 0">
       <div v-for="(response, index) in getResponseValue(ticket.id)" :key="index">
         <p>
-          {{ responseValueDebug(response) }}
+          {{ response.content }}
         </p>
 
         <div class="response-details">
@@ -108,25 +83,34 @@ const responseValueDebug = (response: ResponseType) => {
 
             <span>, uploaded:&nbsp;</span>
 
-            <span>{{ response.createdAt }}</span>
+            <span>{{ formatDate(response.createdAt) }}</span>
+          </div>
+
+          <div>
+            <button class="edit-button">
+              <router-link
+                v-if="loggedInUser.isAdmin"
+                :to="{name: 'responses.edit', params: {id: response.id}}"
+                :ticket="ticket"
+                >
+                Edit response
+              </router-link>
+            </button>
           </div>
         </div>
-
-        <!-- <p class="response">{{ formatDate(response.createdAt) }}</p> -->
-        <!-- <p class="response">{{ formatDateDebug(response.createdAt) }}</p> -->
       </div>
     </div>
 
     <div v-else style="margin-bottom: 2em;">
       <p class="italic-font">No response yet.</p>
-    </div>
 
-    <router-link
+      <router-link
         v-if="loggedInUser.id === ticket.assigneeId"
         :to="{name: 'responses.create', params: { ticketId: ticketId}}"
         >
         Add response
       </router-link>
+    </div>
   </main>
 </template>
 

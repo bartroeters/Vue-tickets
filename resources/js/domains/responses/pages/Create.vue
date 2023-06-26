@@ -6,8 +6,14 @@ import { responseStore } from '..';
 import { goBack } from 'services/router';
 import { getLoggedInUser } from 'domains/auth';
 import { useRoute } from 'vue-router'
+import Ticket from '../../tickets/types';
+import { updateStatus } from 'domains/tickets';
 
 const route = useRoute();
+
+const props = defineProps({
+    ticket: { type: Object as () => Ticket }
+});
 
 const response = ref<ResponseType>({
     id: NaN,
@@ -19,11 +25,19 @@ const response = ref<ResponseType>({
 });
 
 const addResponse = async (responseData: ResponseType) => {
-     await responseStore.actions.create(responseData);
-     goBack();
+    await responseStore.actions.create(responseData);
+    const updatedTicket = await updateStatus(Number.parseInt(route.params.ticketId as string), 3);
+    if (updatedTicket) {
+        goBack();
+    };
 };
 </script>
 
 <template>
-    <response-form v-model="response" :response="response" @submitResponse="addResponse" />
+    <response-form
+        v-model="response"
+        :response="response"
+        :ticket="props.ticket"
+        @submitResponse="addResponse"
+    />
 </template>

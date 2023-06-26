@@ -1,31 +1,46 @@
 <script setup lang="ts">
-import { PropType, onMounted, ref } from 'vue';
+import { PropType, getCurrentInstance, nextTick, reactive, ref } from 'vue';
 import { Response as ResponseType } from '../types';
-import Ticket from 'domains/tickets/types';
 import { getLoggedInUser } from '../../auth';
-import { ticketStore } from '../../tickets';
 import { resizeTextarea } from 'components/form/resize-text-area';
+import { isCreateRoute } from 'helpers/is-create-route';
+import Ticket from '../../tickets/types';
 
 const props = defineProps({
-    response: { type: Object as PropType<ResponseType>}
+    response: { type: Object as PropType<ResponseType>},
+    ticket: {type: Object as PropType<Ticket>}
 });
 
 defineEmits(['submitResponse']);
 
-console.log(props.response?.userId);
-
 const responseData = ref({
     ...props.response,
-    userId: getLoggedInUser.value.id
+    userId: isCreateRoute('responses') ? getLoggedInUser.value.id : props.response.userId
 });
+
+const state = reactive({
+    isSubmitting: false
+});
+
+const instance = getCurrentInstance();
+
+const handleFormSubmit = async () => {
+    state.isSubmitting = true;
+    await nextTick();
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    instance.emit('submitResponse', responseData.value);
+
+    state.isSubmitting = false;
+};
 </script>
 
 <template>
     <div class="response-form-wrapper">
         <form @submit.prevent="$emit('submitResponse', responseData)">
-
             <div>
-                <label for="description">Response:</label>
+                <label>{{ isCreateRoute('responses') ? 'Edit response:' : 'Write a response:' }}</label>
 
                 <textarea
                     name="content"
@@ -36,7 +51,12 @@ const responseData = ref({
                 ></textarea>
             </div>
 
-            <button>Submit</button>
+            <button 
+                :disabled="state.isSubmitting"
+                @click="handleFormSubmit"
+                >
+                {{ state.isSubmitting ? 'Submitting...' : 'Submit' }}
+            </button>
         </form>
     </div>
 </template>

@@ -67,8 +67,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## TODO
 
-6/26/23:
-1
-Why arent timestamps available in the show page invoking getResponseValue()?
-2
-Uploading tog it doesnt work....
+In resources\js\domains\responses\components\ResponseForm.vue how do I make handleFormSubmit work???
+
+Is there a backup plan for mailtrap?

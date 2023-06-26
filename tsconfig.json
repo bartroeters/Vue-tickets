@@ -17,6 +17,7 @@
             "@/*": ["*"],
             "components/*": ["./js/components/*"],
             "domains/*": ["./js/domains/*"],
+            "helpers/*": ["./js/helpers/*"],
             "routes/*": ["./js/routes/*"],
             "services/*": ["./js/services/*"],
             "shared-components/*": ["./js/components/shared/*"]
