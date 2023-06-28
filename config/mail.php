@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'failover'),
+    'default' => env('MAIL_MAILER', 'mailgun'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,6 +51,8 @@ return [
 
         'mailgun' => [
             'transport' => 'mailgun',
+            'domain' => env('MAILGUN_DOMAIN'),
+            'secret' => env('MAILGUN_SECRET'),
         ],
 
         'postmark' => [
@@ -83,7 +85,7 @@ return [
         ],
 
         'from' => [
-            'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+            'address' => env('MAIL_FROM_ADDRESS', 'postmaster@sandbox861057025a3e42528516333b34d02a4a.mailgun.org'),
             'name' => env('MAIL_FROM_NAME', 'Example'),
         ],
     ],

@@ -1,21 +1,25 @@
 <script setup lang="ts">
 import { PropType, reactive } from 'vue';
 import Ticket from '../types';
-import { showAllContent, toggleContent, getFormattedContent } from 'shared-components/get-formatted-content';
+import { showAllContent, toggleContent, getFormattedContent } from 'components/get-formatted-content';
 import Category from 'domains/categories/types';
-import { getCategoryTitle, getUserFullName, getStatusTitle, getLoggedInUserTicketCount, ticketStore } from '..';
+import { getCategoryTitle, getUserFullName, getStatusTitle, getLoggedInUserTicketCount } from '..';
 import { userStore } from 'domains/users';
 import { statusStore } from 'domains/statuses';
 import { getLoggedInUser, isLoggedIn } from 'domains/auth';
 import DesignateAssigneeForm from './DesignateAssigneeForm.vue';
+import { useRoute } from 'vue-router';
+import { categoryStore } from '../../categories';
 
 const props = defineProps({
   tickets: { type: Array as PropType<Ticket[]> },
   categories: { type: Array as PropType<Category[]> }
 });
 
-const users = userStore.actions.getAll();
-statusStore.actions.getAll();
+const route = useRoute();
+
+const categoryId = Number.parseInt(route.params.id as string);
+const category = categoryStore.getters.byId(categoryId);
 
 const data = reactive({
   showAllTickets: false
@@ -24,15 +28,23 @@ const data = reactive({
 const toggleTicketsView = () => {
   data.showAllTickets = !data.showAllTickets;
 };
+
+userStore.actions.getAll();
+statusStore.actions.getAll();
+categoryStore.actions.getAll();
 </script>
 
 <template>
   <div class="header-wrapper">
     <h2>
-      {{ data.showAllTickets ? `All tickets (${tickets.length})` : `Viewing my Tickets (${getLoggedInUserTicketCount()})` }}
+      <span>
+        {{ data.showAllTickets ? `All tickets (${tickets.length})` : `Viewing my Tickets (${getLoggedInUserTicketCount()})` }}
+      </span>
+      <span v-if="category" style="text-transform: lowercase;">&nbsp;in</span>
+      <span>&nbsp;{{ category?.title }}</span>
     </h2>
 
-    <div>
+    <div style="display: flex;">
       <button class="toggle-tickets-button" @click="toggleTicketsView">
         {{ data.showAllTickets ? 'View My Tickets' : 'View All Tickets' }}
       </button>
@@ -102,7 +114,7 @@ const toggleTicketsView = () => {
               <td colspan="5">
                 <span class="button-wrapper">
                   <div class="formatted-content" :class="{ 'show-more': showAllContent[ticket.id] }">
-                    {{ getFormattedContent(ticket.content) }}
+                    {{ getFormattedContent(ticket.content, ticket.id) }}
                   </div>
 
                   <button v-if="ticket.content.length" @click="toggleContent(ticket.id)" class="toggle-content-button">
@@ -110,7 +122,7 @@ const toggleTicketsView = () => {
                   </button>
 
                   <designate-assignee-form
-                    v-if="ticket.assigneeId === null && !(ticket.userId === getLoggedInUser.id) && getLoggedInUser.isAdmin"
+                    v-if="ticket.assigneeId === null && !(ticket.userId === getLoggedInUser?.id) && getLoggedInUser.isAdmin"
                     :ticket="ticket"
                   />
                   

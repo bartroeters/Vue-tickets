@@ -21,7 +21,8 @@ const ticketData = ref({
   ...props.ticket,
   userId: createTicket ? getLoggedInUser.value.id : props.ticket?.userId,
   assigneeId: createTicket ? null : props.ticket.assigneeId,
-  statusId: createTicket ? 1 : props.ticket.statusId
+  statusId: createTicket ? 1 : props.ticket.statusId,
+  categoryIds: []
 });
 </script>
 

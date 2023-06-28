@@ -42,7 +42,7 @@ class ResponseController extends Controller
         
         $user = User::findOrFail($ticket->user_id);
 
-        Mail::to($user->email)->send(new ResponseNotifierMail($user, $response));
+        // Mail::to($user->email)->send(new ResponseNotifierMail($user, $response));
 
         return new ResponseResource($response);
     }

@@ -13,11 +13,6 @@ const props = defineProps({
 
 defineEmits(['submitResponse']);
 
-const responseData = ref({
-    ...props.response,
-    userId: isCreateRoute('responses') ? getLoggedInUser.value.id : props.response.userId
-});
-
 const state = reactive({
     isSubmitting: false
 });
@@ -34,6 +29,11 @@ const handleFormSubmit = async () => {
 
     state.isSubmitting = false;
 };
+
+const responseData = ref({
+    ...props.response,
+    userId: isCreateRoute('responses') ? getLoggedInUser.value.id : props.response.userId
+});
 </script>
 
 <template>

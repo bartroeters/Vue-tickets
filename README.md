@@ -67,6 +67,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## TODO
 
-In resources\js\domains\responses\components\ResponseForm.vue how do I make handleFormSubmit work???
-
-Is there a backup plan for mailtrap?
+*
+When typing in the URL `http://127.0.0.1:8000/categories` the amount of tickets per category arent loaded.

@@ -26,11 +26,7 @@ export default defineConfig({
             'domains': path.resolve(__dirname, './resources/js/domains'),
             'helpers': path.resolve(__dirname, './resources/js/helpers'),
             'routes': path.resolve(__dirname, './resources/js/routes'),
-            'services': path.resolve(__dirname, './resources/js/services'),
-            'shared-components': path.resolve(
-                __dirname,
-                './resources/js/components/shared'
-            )
+            'services': path.resolve(__dirname, './resources/js/services')
         },
     },
 });

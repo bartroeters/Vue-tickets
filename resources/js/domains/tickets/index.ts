@@ -11,8 +11,6 @@ import { responseStore } from 'domains/responses';
 import { Response as ResponseType } from 'domains/responses/types';
 import Ticket from './types';
 import { loggedInUser } from '../auth';
-import User from '../users/types';
-import { formatDate } from '@vueuse/core';
 
 export const TICKET_DOMAIN_NAME = 'tickets';
 
@@ -57,7 +55,7 @@ export const getLoggedInUserTicketCount = () => {
     let count = 0;
   
     ticketStore.getters.all.value.forEach((ticket: Ticket) => {
-      if (ticket.userId === loggedInUser.value.id) {
+      if (ticket.userId === loggedInUser.value?.id) {
         count++;
       }
     });
@@ -78,4 +76,6 @@ export const updateStatus = async (ticketId: number, statusId: number) => {
     return null;
 };
 
-
+export const getCategoryTicketsRoute = (categoryId: number) => {
+    return { name: 'tickets.overview', params: { id: categoryId.toString() } };
+};

@@ -49,6 +49,7 @@ class ResetPasswordMail extends Mailable
 {
     $resetUrl = 'http://localhost:8000/reset-password/'.$this->url.'/'.$this->user->email;
 
+    
     return $this->markdown('emails.resetEmail')
         ->subject('Password reset notification')
         ->with([

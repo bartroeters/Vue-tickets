@@ -140,9 +140,9 @@ class AuthController extends Controller
         }
 
         $user = User::retrieveByEmail($validated['email']);
+        
         $token = (new PasswordReset)->create($user);
-    
-        Mail::to($user->email)->send(new ResetPasswordMail($token, $user));
+        // Mail::to($user->email)->send(new ResetPasswordMail($token, $user));
     
         return new NoContentResponse;
     }
