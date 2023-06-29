@@ -61,7 +61,7 @@ h2 {
   border-bottom: 1px dotted #444;
 }
 
-.response-title {
+.response-title, .note-title {
   margin: 10px 0 5px 0;
 }
 
@@ -132,4 +132,21 @@ p {
   color: white;
   padding: 5px;
   margin: 0px 44px 14px 0;
+}
+
+.note-title {
+  padding-bottom: 8px;
+}
+
+.note-overview {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.note {
+  margin-top: -16px;
+}
+
+.note:first-child {
+  margin-top: 0;
 }

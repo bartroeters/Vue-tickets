@@ -5,9 +5,11 @@ import { categoryStore } from 'domains/categories';
 import { getCurrentRouteId } from 'services/router';
 import { statusStore } from 'domains/statuses';
 import { responseStore } from 'domains/responses';
-import { getCategoryTitle, getUserFullName, getStatusTitle, getResponseValue } from '..';
-import { loggedInUser } from '../../auth';
+import { noteStore } from 'domains/notes';
+import { getCategoryTitle, getUserFullName, getStatusTitle, getResponseValue, getNoteValue } from '..';
+import { getLoggedInUser, loggedInUser } from '../../auth';
 import { formatDate } from 'helpers/date-time-formatter';
+import AddNoteForm from '../components/AddNoteForm.vue';
 
 const ticketId = getCurrentRouteId();
 const ticket = ticketStore.getters.byId(ticketId);
@@ -17,6 +19,7 @@ userStore.actions.getAll();
 categoryStore.actions.getAll();
 statusStore.actions.getAll();
 responseStore.actions.getAll();
+noteStore.actions.getAll();
 </script>
 
 <template>
@@ -100,8 +103,8 @@ responseStore.actions.getAll();
         </div>
       </div>
     </div>
-
-    <div v-else style="margin-bottom: 2em;">
+    
+    <div v-else style="margin-bottom: 2em;" class="response-separator">
       <p class="italic-font">No response yet.</p>
 
       <router-link
@@ -110,6 +113,22 @@ responseStore.actions.getAll();
         >
         Add response
       </router-link>
+    </div>
+
+    <add-note-form
+        v-if="!(ticket.userId === getLoggedInUser?.id) && getLoggedInUser.isAdmin"
+        :ticket="ticket"
+      />
+
+    <h6 class="note-title">Notes</h6>
+
+    <div
+      v-if="!(ticket.userId === getLoggedInUser?.id) && getLoggedInUser.isAdmin && getNoteValue(ticket.id).length > 0"
+      class="note-overview"
+      >
+      <p v-for="(note, index) in getNoteValue(ticket.id)" :key="index" class="note">
+        {{ note.content }}
+      </p>
     </div>
   </main>
 </template>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TicketController;
@@ -28,6 +29,7 @@ Route::post('register/{user:invite_token}', [AuthController::class, 'register'])
 Route::middleware(['auth'])->group(function () {
     Route::resource('tickets', TicketController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('notes', NoteController::class);
     Route::resource('responses', ResponseController::class);
     Route::resource('statuses', StatusController::class);
     Route::resource('users', UserController::class);

@@ -19,6 +19,6 @@ class UserSeeder extends Seeder {
             'phonenumber' => '0612345678'
         ]);
 
-        User::factory(20)->create();
+        User::factory(5)->create();
     }
 }

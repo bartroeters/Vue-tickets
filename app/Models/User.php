@@ -99,4 +99,9 @@ class User extends BaseModel implements JWTSubject, AuthenticatableContract, Aut
     {
         return $this->hasMany(Response::class);
     }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
 }

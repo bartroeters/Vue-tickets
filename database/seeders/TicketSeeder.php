@@ -13,7 +13,7 @@ class TicketSeeder extends Seeder
      */
     public function run(): void
     {
-        Ticket::factory(75)->create()->each(function (Ticket $ticket) {
+        Ticket::factory(15)->create()->each(function (Ticket $ticket) {
             $syncedCategories = Category::inRandomOrder()->pluck('id')->random(rand(1, min(4, Category::count())));
 
             $ticket->categories()->sync($syncedCategories);

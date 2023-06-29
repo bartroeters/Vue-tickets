@@ -11,6 +11,8 @@ import { responseStore } from 'domains/responses';
 import { Response as ResponseType } from 'domains/responses/types';
 import Ticket from './types';
 import { loggedInUser } from '../auth';
+import { noteStore } from 'domains/notes';
+import { Note } from '../notes/types';
 
 export const TICKET_DOMAIN_NAME = 'tickets';
 
@@ -50,6 +52,12 @@ export const getResponseValue = (ticketId: number): ResponseType[] => {
     return responses.filter((response: ResponseType) => response.ticketId === ticketId)
                     .map((response: ResponseType) => Object.freeze(response));
 };
+
+export const getNoteValue = (ticketId: number): Note[] => {
+    const notes = noteStore.getters.all.value;
+    return notes.filter((note: Note) => note.ticketId === ticketId)
+                .map((note: Note) => Object.freeze(note));
+  };
 
 export const getLoggedInUserTicketCount = () => {
     let count = 0;

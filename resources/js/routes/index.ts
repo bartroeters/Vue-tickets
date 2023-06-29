@@ -4,6 +4,7 @@ import { userRoutes } from 'domains/users';
 import { responseRoutes } from 'domains/responses';
 import { statusRoutes } from 'domains/statuses';
 import { authRoutes } from 'domains/auth';
+import { noteRoutes } from '../domains/notes';
 
 export const routes = [
     {
@@ -13,6 +14,7 @@ export const routes = [
     ...ticketRoutes,
     ...categoryRoutes,
     ...userRoutes,
+    ...noteRoutes,
     ...responseRoutes,
     ...statusRoutes,
     ...authRoutes
