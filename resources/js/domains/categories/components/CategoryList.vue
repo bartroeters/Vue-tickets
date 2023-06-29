@@ -10,13 +10,25 @@ const props = defineProps({
     categories: { type: Array as PropType<Category[]> }
 });
 
+const deleteCategory = async (categoryId: number) => {
+  await categoryStore.actions.delete(categoryId);
+};
+
 const categories = categoryStore.actions.getAll();
 </script>
 
 <template>
     <div class="header-wrapper">
         <h2>All categories</h2>
+
+        <router-link
+            style="color: white;"
+            :to="{name: 'categories.create'}"
+            >
+            Create a new category
+        </router-link>
     </div>
+
     <div class="category-list">
         <div v-for="category in getSortedCategories()" :key="category.id" class="category-item">
             <router-link :to="getCategoryTicketsRoute(category.id)" class="category-link">
@@ -26,6 +38,10 @@ const categories = categoryStore.actions.getAll();
                     <router-link :to="{name: 'categories.edit', params: {id: category.id}}">
                         edit
                     </router-link>
+
+                    <button @click="deleteCategory(category.id)" class="delete-button">
+                            delete
+                        </button>
                 </div>
                 <div class="category-ticket-count">{{ getCategoryTicketCount(category) }} Tickets</div>
             </router-link>

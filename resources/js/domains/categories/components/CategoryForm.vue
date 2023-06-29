@@ -17,15 +17,11 @@ const categoryData = ref({
 
 <template>
     <div class="form-wrapper">
-        <form @submit.prevent="$emit('submitResponse', categoryData)">
+        <form @submit.prevent="$emit('submitCategory', categoryData)">
             <div>
-                <label>{{ isCreateRoute('categories') ? 'Edit category:' : 'Write a category:' }}</label>
+                <label>{{ isCreateRoute('categories') ? 'Edit category:' : 'Add a category:' }}</label>
 
-                <div>
-                    <label for="title">Title:</label>
-
-                    <input name="title" id="title" v-model="categoryData.title" />
-                </div>
+                <input name="title" id="title" v-model="categoryData.title" />
             </div>
 
             <!-- <button 

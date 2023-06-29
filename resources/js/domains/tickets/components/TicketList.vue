@@ -117,28 +117,30 @@ categoryStore.actions.getAll();
                     {{ getFormattedContent(ticket.content, ticket.id) }}
                   </div>
 
-                  <button v-if="ticket.content.length" @click="toggleContent(ticket.id)" class="toggle-content-button">
-                    {{ showAllContent[ticket.id] ? '&uarr; Show less' : 'Show more &darr;' }}
-                  </button>
-
-                  <designate-assignee-form
-                    v-if="ticket.assigneeId === null && !(ticket.userId === getLoggedInUser?.id) && getLoggedInUser.isAdmin"
-                    :ticket="ticket"
-                  />
-                  
-                  <span>
-                    <button class="link-to-show-page">
-                      <router-link :to="{name: 'tickets.show', params: {id: ticket.id}}">
-                        &rarr; Read all
-                      </router-link>
+                  <div style="display: flex; justify-content: left;">
+                    <button v-if="ticket.content.length" @click="toggleContent(ticket.id)" class="toggle-content-button">
+                      {{ showAllContent[ticket.id] ? '&uarr; Show less' : 'Show more &darr;' }}
                     </button>
 
-                    <button v-if="isLoggedIn && ticket.userId === getLoggedInUser.id" class="link-to-edit-page">
-                      <router-link :to="{name: 'tickets.edit', params: {id: ticket.id}}">
-                        Edit ticket
-                      </router-link>
-                    </button>
-                  </span>
+                    <designate-assignee-form
+                      v-if="ticket.assigneeId === null && !(ticket.userId === getLoggedInUser?.id) && getLoggedInUser.isAdmin"
+                      :ticket="ticket"
+                    />
+                    
+                  </div>
+                    <span>
+                      <button class="link-to-show-page">
+                        <router-link :to="{name: 'tickets.show', params: {id: ticket.id}}">
+                          &rarr; Read all
+                        </router-link>
+                      </button>
+
+                      <button v-if="isLoggedIn && ticket.userId === getLoggedInUser.id" class="link-to-edit-page">
+                        <router-link :to="{name: 'tickets.edit', params: {id: ticket.id}}">
+                          Edit ticket
+                        </router-link>
+                      </button>
+                    </span>
                 </span>
               </td>
             </tr>

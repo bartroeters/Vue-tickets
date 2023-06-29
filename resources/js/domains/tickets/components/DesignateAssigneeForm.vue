@@ -26,12 +26,47 @@ const admins = userStore.getters.all.value.filter(user => user.isAdmin);
 
 <template>
   <form @submit.prevent="designateAssignee">
-    <select name="admins" id="admins" v-model="ticketData.assigneeId">
-      <option v-for="admin in admins" :value="admin.id" :key="admin.id">
-          {{ getUserFullName(admin.id) }}
-      </option>
-    </select>
+    <span style="display: flex; justify-content: left;">
+      <select name="admins" id="admins" v-model="ticketData.assigneeId">
+        <option v-for="admin in admins" :value="admin.id" :key="admin.id">
+            {{ getUserFullName(admin.id) }}
+        </option>
+      </select>
 
-    <button type="submit" :disabled="!isAssigneeSelected">Designate assignee</button>
+      <button
+        type="submit"
+        :disabled="!isAssigneeSelected"
+        style="width: fit-content; height: fit-content;"
+        class="designate-assignee-button"
+        >
+        Designate&nbsp;assignee
+      </button>
+    </span>
   </form>
 </template>
+
+<style scoped>
+.designate-assignee-button {
+  background-color: #fff;
+  border: 1px solid #333;
+  padding: 4px 12px;
+  font-size: 13.1px;
+  letter-spacing: .5px;
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+.designate-assignee-button * {
+  color: #333;
+  text-decoration: none;
+}
+
+.designate-assignee-button:hover {
+  background-color: #888;
+  color: #fff;
+}
+
+.designate-assignee-button:hover * {
+  color: #fff;
+}
+</style>

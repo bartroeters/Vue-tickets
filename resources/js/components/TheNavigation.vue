@@ -61,8 +61,9 @@ import { isLoggedIn, logout } from '../domains/auth';
                             class="nav-link active router-link-exact-active"
                             active-class="active-link"
                             aria-current="page"
+                            @click="logout"
                             >
-                            <button @click="logout" class="logout">Logout</button>
+                            Logout
                         </a>
                     </li>
                 </ul>
