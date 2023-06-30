@@ -98,18 +98,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Return the user for registration.
-     *
-     * @param \App\Models\User $user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function userToRegister(User $user)
-    {
-        return new UserOverview($user);
-    }
-
-    /**
      * Register the user.
      *
      * @param \App\Http\Requests\ValidatePasswordRequest $request
@@ -120,6 +108,7 @@ class AuthController extends Controller
     public function register(ValidatePasswordRequest $request, User $user)
     {
         $validated = $request->validated();
+        dd($validated);
         $user->update(['password' => bcrypt($validated['password']), 'inviteToken' => null]);
         return new NoContentResponse;
     }

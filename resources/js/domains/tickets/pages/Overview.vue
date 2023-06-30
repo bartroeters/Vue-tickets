@@ -5,11 +5,12 @@ import { categoryStore } from 'domains/categories';
 import TicketList from '../components/TicketList.vue';
 import { computed } from 'vue';
 
-const sortedTickets = computed(() => getSortedTickets());
 const categories = categoryStore.getters.all;
 
 const route = useRoute();
 const categoryId = route.params.id as string;
+
+const sortedTickets = computed(() => getSortedTickets());
 
 const filteredTickets = computed(() => {
     if (categoryId) {
@@ -24,6 +25,5 @@ categoryStore.actions.getAll();
 </script>
 
 <template>
-    <!-- <ticket-list :tickets="sortedTickets" :categories="categories" /> -->
     <ticket-list :tickets="filteredTickets" :categories="categories" />
 </template>

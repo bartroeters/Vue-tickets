@@ -29,7 +29,7 @@ export const authRoutes = [
         meta: {auth: false, canSeeWhenLoggedIn: false},
     },
     {
-        path: '/registreren/:token',
+        path: '/register',
         name: 'register',
         component: Register,
         meta: {auth: false, canSeeWhenLoggedIn: false},

@@ -57,6 +57,17 @@ import { isLoggedIn, logout } from '../domains/auth';
                     </li>
 
                     <li class="nav-item">
+                        <router-link
+                            :to="{name: 'users.overview'}"
+                            class="nav-link active router-link-exact-active"
+                            active-class="active-link"
+                            aria-current="page"
+                            >
+                            User Overview
+                        </router-link>
+                    </li>
+
+                    <li class="nav-item">
                         <a  
                             class="nav-link active router-link-exact-active"
                             active-class="active-link"

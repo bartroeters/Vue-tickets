@@ -13,7 +13,7 @@ return new class extends Migration
 {
     Schema::create('responses', function (Blueprint $table) {
         $table->bigIncrements('id');
-        $table->foreignId('user_id')->cascadeOnDelete();
+        $table->foreignId('user_id')->cascadeOnDelete()->cascadeOnDelete();
         $table->foreignId('ticket_id')->cascadeOnDelete();
         $table->text('content');
         $table->timestamps();

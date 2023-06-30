@@ -24,7 +24,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('send-email-reset-password', [AuthController::class, 'resetPasswordRequest']);
 Route::post('reset-password', [AuthController::class, 'updatePassword']);
 Route::get('get-user-to-register/{user:invite_token}', [AuthController::class, 'userToRegister']);
-Route::post('register/{user:invite_token}', [AuthController::class, 'register']);
+Route::post('register', [AuthController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('tickets', TicketController::class);

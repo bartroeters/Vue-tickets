@@ -50,7 +50,9 @@ class UserController extends Controller
 
         $user = User::create($validated);
 
-        Mail::to($user->email)->send(new InviteUser($user));
+        return new UserOverview($user);
+
+        // Mail::to($user->email)->send(new InviteUser($user));
     }
 
     /**

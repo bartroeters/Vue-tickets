@@ -45,7 +45,10 @@ const submit = async () => {
             <button class="btn btn-primary">Login</button>
         </div>
 
-        <router-link :to="{ name: 'forgotPassword' }" class="form-link">Wachtwoord vergeten</router-link>
+        <div class="form-links">
+            <router-link :to="{ name: 'forgotPassword' }" class="form-link">Wachtwoord vergeten</router-link>
+            <router-link :to="{ name: 'register' }" class="form-link">Register</router-link>
+        </div>
     </form>
 </template>
   

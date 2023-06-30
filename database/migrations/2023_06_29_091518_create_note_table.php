@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('user_id')->unsigned();
+            $table->foreignId('user_id')->unsigned()->cascadeOnDelete();
             $table->foreignId('ticket_id')->unsigned();
             $table->text('content');
             $table->timestamps();

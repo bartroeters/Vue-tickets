@@ -3,7 +3,7 @@ import { PropType, getCurrentInstance, nextTick, reactive, ref } from 'vue';
 import { Response as ResponseType } from '../types';
 import { getLoggedInUser } from '../../auth';
 import { resizeTextarea } from 'components/form/resize-text-area';
-import { isCreateRoute } from 'helpers/is-create-route';
+import { isEditRoute } from 'helpers/is-create-route';
 import Ticket from '../../tickets/types';
 
 const props = defineProps({
@@ -32,7 +32,7 @@ const handleFormSubmit = async () => {
 
 const responseData = ref({
     ...props.response,
-    userId: isCreateRoute('responses') ? getLoggedInUser.value.id : props.response.userId
+    userId: isEditRoute('responses') ? getLoggedInUser.value.id : props.response.userId
 });
 </script>
 
@@ -40,7 +40,7 @@ const responseData = ref({
     <div class="response-form-wrapper">
         <form @submit.prevent="$emit('submitResponse', responseData)">
             <div>
-                <label>{{ isCreateRoute('responses') ? 'Edit response:' : 'Write a response:' }}</label>
+                <label>{{ isEditRoute('responses') ? 'Edit response:' : 'Write a response:' }}</label>
 
                 <textarea
                     name="content"

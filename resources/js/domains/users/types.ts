@@ -3,7 +3,6 @@ export default interface User {
     firstName: string
     lastName: string
     email: string
-    password: string
     isAdmin: boolean
     phonenumber: number
     inviteToken: string;

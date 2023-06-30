@@ -1,0 +1,38 @@
+.user-list {
+  margin-top: 40px;
+}
+
+/* Use classes from overview.css */
+.table-wrapper {
+  overflow-y: scroll;
+  top: 0;
+  max-height: calc(100vh - 160px);
+}
+
+.overview-table td {
+  padding: 8px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #444;
+}
+
+.overview-table th {
+  padding: 8px;
+  font-size: 17px;
+  letter-spacing: 1.3px;
+}
+
+.table-row-separator {
+  border-bottom: 3px solid #444;
+}
+
+.delete-button {
+  color: red;
+  text-decoration: none;
+  
+}
+
+.delete-button:hover {
+  color: rgb(192, 50, 50);
+  cursor: pointer;
+}

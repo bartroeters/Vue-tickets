@@ -76,7 +76,7 @@ categoryStore.actions.getAll();
               <td class="small-width">{{ ticket.id }}</td>
 
               <td>
-                <router-link :to="{name: 'users.overview'}">
+                <router-link :to="{name: 'users.overview'}" style="color: inherit; text-decoration: none;">
                   {{ getUserFullName(ticket.userId) }}
                 </router-link>
               </td>
@@ -152,6 +152,6 @@ categoryStore.actions.getAll();
 </template>
 
 <style scoped>
-@import 'style/shared/overview.css';
 @import 'style/ticket/overview.css';
+@import 'style/shared/overview.css';
 </style>

@@ -47,8 +47,9 @@ const admins = userStore.getters.all.value.filter(user => user.isAdmin);
 
 <style scoped>
 .designate-assignee-button {
-  background-color: #fff;
+  background-color: black;
   border: 1px solid #333;
+  color: #fff;
   padding: 4px 12px;
   font-size: 13.1px;
   letter-spacing: .5px;
@@ -56,17 +57,8 @@ const admins = userStore.getters.all.value.filter(user => user.isAdmin);
   cursor: pointer;
 }
 
-.designate-assignee-button * {
-  color: #333;
-  text-decoration: none;
-}
-
 .designate-assignee-button:hover {
-  background-color: #888;
-  color: #fff;
-}
-
-.designate-assignee-button:hover * {
+  background-color: #666;
   color: #fff;
 }
 </style>

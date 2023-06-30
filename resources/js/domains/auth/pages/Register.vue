@@ -13,48 +13,51 @@ const userToRegister = ref<User>({
   firstName: '',
   lastName: '',
   email: '',
-  password: '',
   isAdmin: false,
   phonenumber: 0,
   inviteToken: ''
 });
 
-const getUserToRegister = async (token: string) => {
-  const { data } = await getRequest(`get-user-to-register/${token}`);
-  if (!data) return;
-  userToRegister.value = data;
-};
-
-const submit = async () => {
-  await postRequest(`register/${userToRegister.value.inviteToken}`, newCredentials.value);
+const registerUser = async () => {
+  await postRequest(`register`, newCredentials.value);
   await login({ email: userToRegister.value.email, password: newCredentials.value.password });
   goToOverviewPage(TICKET_DOMAIN_NAME);
 };
-
-getUserToRegister(getCurrentRouteToken());
 </script>
 
 <template>
-    <h1>Register</h1>
-    <form @submit.prevent="submit">
-        <div class="mb-2">
-            <label for="email">First name:</label>
-            <input v-model="userToRegister.firstName" type="text" name="firstName" disabled />
+    <h2 class="form-title">Register</h2>
+  
+    <div class="form-wrapper">
+      <form @submit.prevent="registerUser">
+        <div>
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" v-model="userToRegister.firstName" required>
         </div>
-
-        <div class="mb-2">
-            <label for="email">Last name:</label>
-            <input v-model="userToRegister.lastName" type="text" name="lastName" disabled />
+  
+        <div>
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" v-model="userToRegister.lastName" required>
         </div>
-
-        <div class="mb-2">
-            <label for="email">Email:</label>
-            <input v-model="userToRegister.email" type="text" name="email" disabled />
+  
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" v-model="userToRegister.email" required>
+        </div>
+  
+        <div>
+          <label for="isAdmin">Is Admin:</label>
+          <input type="checkbox" id="isAdmin" v-model="userToRegister.isAdmin">
+        </div>
+  
+        <div>
+          <label for="phonenumber">Phone Number:</label>
+          <input type="text" id="phonenumber" v-model="userToRegister.phonenumber" required>
         </div>
 
         <div class="mb-2">
             <label for="email">Password:</label>
-            <input v-model="newCredentials.password" type="password" name="password" />
+            <input v-model="newCredentials.password" type="password" class="form-control" name="password" />
         </div>
 
         <div class="mb-2">
@@ -62,13 +65,19 @@ getUserToRegister(getCurrentRouteToken());
             <input
                 v-model="newCredentials.repeatedPassword"
                 type="password"
-            
+                class="form-control"
                 name="repeatedPassword"
             />
         </div>
-        
-        <div class="pt-3">
-            <button>Register</button>
+  
+        <div class="button-wrapper">
+          <button>Sign up</button>
         </div>
-    </form>
-</template>
+      </form>
+    </div>
+  </template>
+  
+  <style>
+  @import 'style/shared/form.css';
+  @import 'style/user/form.css';
+  </style>

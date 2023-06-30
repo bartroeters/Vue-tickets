@@ -55,9 +55,14 @@ export const getResponseValue = (ticketId: number): ResponseType[] => {
 
 export const getNoteValue = (ticketId: number): Note[] => {
     const notes = noteStore.getters.all.value;
-    return notes.filter((note: Note) => note.ticketId === ticketId)
-                .map((note: Note) => Object.freeze(note));
-  };
+    const sortedNotes = notes
+      .filter((note: Note) => note.ticketId === ticketId)
+      .sort((newestNote: Note, oldestNote: Note) =>
+        new Date(oldestNote.createdAt).getTime() -
+        new Date(newestNote.createdAt).getTime())
+      .map((note: Note) => Object.freeze(note));
+    return sortedNotes;
+};
 
 export const getLoggedInUserTicketCount = () => {
     let count = 0;

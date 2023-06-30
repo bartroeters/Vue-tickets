@@ -123,11 +123,11 @@ noteStore.actions.getAll();
     <h6 class="note-title">Notes</h6>
 
     <div
-      v-if="!(ticket.userId === getLoggedInUser?.id) && getLoggedInUser.isAdmin && getNoteValue(ticket.id).length > 0"
+      v-if="ticket.userId === getLoggedInUser?.id && getLoggedInUser.isAdmin && getNoteValue(ticket.id).length > 0"
       class="note-overview"
       >
       <p v-for="(note, index) in getNoteValue(ticket.id)" :key="index" class="note">
-        {{ note.content }}
+        {{ note.content }} ({{ formatDate(note.createdAt) }})
       </p>
     </div>
   </main>
