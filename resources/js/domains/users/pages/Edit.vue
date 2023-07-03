@@ -2,7 +2,7 @@
 import { getCurrentRouteId, goToRoute } from 'services/router';
 import UserForm from '../components/UserForm.vue';
 import { userStore } from '..';
-import User from '../types';
+import { User } from '../types';
 
 const userId = getCurrentRouteId();
 const user = userStore.getters.byId(userId);

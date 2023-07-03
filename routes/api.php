@@ -7,6 +7,7 @@ use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'login']);
 Route::post('send-email-reset-password', [AuthController::class, 'resetPasswordRequest']);
 Route::post('reset-password', [AuthController::class, 'updatePassword']);
-Route::get('get-user-to-register/{user:invite_token}', [AuthController::class, 'userToRegister']);
 Route::post('register', [AuthController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {

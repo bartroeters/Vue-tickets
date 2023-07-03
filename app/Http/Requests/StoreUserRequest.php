@@ -20,7 +20,9 @@ class StoreUserRequest extends FormRequest
             'lastName' => [],
             'email' => [],
             'isAdmin' => [],
-            'phonenumber' => []
+            'phonenumber' => [],
+            'password' => [],
+            'repeatedPassword' => []
         ];
     }
 }

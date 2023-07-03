@@ -1,9 +1,13 @@
-export default interface User {
+export interface User {
     id: number
     firstName: string
     lastName: string
     email: string
     isAdmin: boolean
     phonenumber: number
-    inviteToken: string;
+};
+
+export interface UserToRegister extends User {
+    password: string
+    repeatedPassword: string
 };

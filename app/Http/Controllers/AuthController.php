@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\ValidatePasswordRequest;
 use App\Http\Resources\LoggedInUserResource;
@@ -105,21 +106,27 @@ class AuthController extends Controller
      *
      * @return NoContentResponse
      */
-    public function register(ValidatePasswordRequest $request, User $user)
+    public function register(StoreUserRequest $request)
     {
         $validated = $request->validated();
-        dd($validated);
-        $user->update(['password' => bcrypt($validated['password']), 'inviteToken' => null]);
-        return new NoContentResponse;
+
+        $validated['inviteToken'] = Str::random(40);
+
+        $user = User::create($validated);
+
+        
+
+        return new UserOverview($user);
+
     }
 
-        /**
-         * Send a reset password mail to user
-         *
-         * @param ResetPasswordRequest $request
-         *
-         * @return NoContentResponse
-         */
+    /**
+     * Send a reset password mail to user
+     *
+     * @param ResetPasswordRequest $request
+     *
+     * @return NoContentResponse
+     */
     public function ResetPasswordRequest(ResetPasswordRequest $request): NoContentResponse
     {
         $validated = $request->validated();
