@@ -5,4 +5,3 @@ declare module 'shared-components/get-formatted-content' {
     export function toggleContent(ticketId: number): void;
     export function getFormattedContent(content: string): string;
 }
-  
